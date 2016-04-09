@@ -1,14 +1,13 @@
-
-
-
 public class Buildings {
 	
+	//variables
 	private boolean house;
 	private boolean fence;
 	private boolean well;
 	private boolean mill;
 	private boolean mine;
 	
+	//constructor
 	public Buildings()
 	{
 		house = false;
