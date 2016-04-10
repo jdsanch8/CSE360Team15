@@ -1,25 +1,23 @@
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 
-// getting the comparable interface going to sort arrayList
+
 public class SortList{
 	
 	public static void main(String []args)
 	{
 		ArrayList<Stats> list = new ArrayList<Stats>();
-		list.add(new Stats("GregA", 1,2,6,10));
-		list.add(new Stats("GregB", 0,3,5,10));
-		list.add(new Stats("GregC", 0,3,1,0));
-		list.add(new Stats("GregD", 1,3,6,10));
-		list.add(new Stats("GregE", 1,1,6,10));
-		list.add(new Stats("GregF", 1,3,8,5));
-		list.add(new Stats("GregG", 0,3,12,0));
-		list.add(new Stats("GregH", 1,3,6,10));
-		list.add(new Stats("GregI", 1,1,6,10));
-		list.add(new Stats("GregJ", 1,3,12,4));
+		list.add(new Stats("GregJ", 1,2,6,10));
+		list.add(new Stats("GregI", 0,3,5,10));
+		list.add(new Stats("GregH", 0,3,1,0));
+		list.add(new Stats("GregG", 1,3,6,10));
+		list.add(new Stats("GregF", 1,1,6,10));
+		list.add(new Stats("GregE", 1,3,8,5));
+		list.add(new Stats("GregD", 0,3,12,0));
+		list.add(new Stats("GregC", 1,3,6,10));
+		list.add(new Stats("GregB", 1,1,6,10));
+		list.add(new Stats("GregA", 1,3,12,4));
 		
 		Collections.sort(list);
 		for (Stats stat: list)
@@ -91,14 +89,12 @@ class Stats implements Comparable<Stats>{
 						return compareSupplies-this.supplies;
 					}
 					else{ // all fields are the same.  Put in alphabetical order by player name
-						String getPlayerString = compareStat.getPlayer();
-						getPlayerString.compareTo(this.player);
-						return 0;
-					}
-				}
+						String playerString = compareStat.getPlayer();
+						return (1-playerString.compareTo(this.player));
 					
+					}
+				}	
 			}
-			
 		}
 	}
 	
