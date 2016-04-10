@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
+//Version Apr 10.1
 public class Statistics {
 	
 	private String playerName;
@@ -9,47 +11,8 @@ public class Statistics {
 	private int days;
 	private int buildings;
 	private int resources;
-    // note: create txt file of this name and place in same package
-	private File file = new File(getClass().getResource("gameStats-group15.txt").getFile());
-	// nested class acting like a struct.  What can I say, I'm more of a C/C++ kind of guy...
-	private class Stats {
-		
-		private String player;
-		private int win;
-		private int time;
-		private int properties;
-		private int supplies; 
-		
-		private Stats(String player,int win, int time, int properties, int supplies)
-		{
-			this.player = player;
-			this.win = win;
-			this.time = time;
-			this.properties = properties;
-			this.supplies = supplies;
-		}
-		private String getPlayer()
-		{
-			return this.player;
-		}
-		
-		private int getWin()
-		{
-			return this.win;
-		}
-		private int getTime()
-		{
-			return this.time;
-		}
-		private int properties()
-		{
-			return this.properties;
-		}
-		private int supplies()
-		{
-			return this.supplies;
-		}
-	}
+    // note: create txt file of this name and place in same package.  Program will automatically create a file in /bin directory
+	private File file = new File(getClass().getResource("group15.txt").getFile());
 	
 	public Statistics(String playerName) 
 	{
@@ -82,13 +45,9 @@ public class Statistics {
 			}   
 			bufferedReader.close();         
 		}
-		catch(FileNotFoundException ex) {
-			System.out.println(
-					"Unable to open file '" +  file.getName() + "'.");                
+		catch(FileNotFoundException ex) { System.out.println("Unable to open file '" +  file.getName() + "'.");                
 		}
-		catch(IOException ex) {
-			System.out.println(
-					"Error reading file '"  + file.getName() + "'.");                  
+		catch(IOException ex) {System.out.println("Error reading file '"  + file.getName() + "'.");                  
 		}
 	}
 	
@@ -117,7 +76,7 @@ public class Statistics {
 		
 		try {
 			
-            FileWriter fileWriter = new FileWriter(file.getAbsoluteFile());
+            FileWriter fileWriter = new FileWriter(file.getAbsoluteFile(), true); //true is append
 
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
@@ -132,7 +91,6 @@ public class Statistics {
             bufferedWriter.write(Integer.toString(this.resources));
             bufferedWriter.newLine();
            
-            sortFile();
             bufferedWriter.close();
         }
         catch(IOException ex) {
@@ -140,15 +98,11 @@ public class Statistics {
         }
 	}
 	
-	private void sortFile()
+	public ArrayList<Stats> makeArrayList()
 	{
 		ArrayList<Stats> list = new ArrayList<Stats>();
-		String player = "";
-		int win = 0;
-		int time = 0;
-		int properties = 0;
-		int supplies = 0;
-		String [] token;
+		String token [];
+		String player; int win; int time; int properties; int supplies;
 
 		String line = null;
 
@@ -158,33 +112,142 @@ public class Statistics {
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 
 			while((line = bufferedReader.readLine()) != null) {
+
 				//parse out each term.  put in an index of arrayList
 				token = line.split("-");
 				player = token[0];
+
 				win = Integer.parseInt(token[1]);
 				time = Integer.parseInt(token[2]);
 				properties = Integer.parseInt(token[3]);
 				supplies = Integer.parseInt(token[4]);
-				
+
 				list.add(new Stats(player, win,time, properties, supplies));
-				//Stats st = list.get(0);// get doesn't remove, like "peek"
-				//int v = st.getWin();	
+
+				//debug
+				/*
+				for(int i = 0; i < token.length; i++)
+				{
+					System.out.println("token[" + i + "] = " + token[i]);
+				}
+				*/
 			}   
-			bufferedReader.close();         
+			bufferedReader.close();   
+			Collections.sort(list);
 		}
-		//To do: look at each index of arrayList.  and put in weighted order
-		catch(FileNotFoundException ex) {
-			System.out.println(
-					"Unable to open file '" +  file.getName() + "'.");                
+		catch(FileNotFoundException ex) { System.out.println("Unable to open file '" +  file.getName() + "'.");                
+		}
+		catch(IOException ex) {System.out.println("Error reading file '"  + file.getName() + "'.");                  
+		}   
+		return list;
+	}
+
+	public void writeListToFile(ArrayList<Stats> arrayList){
+
+		try {
+
+			FileWriter fileWriter = new FileWriter(file.getAbsoluteFile(), false); //append is false
+
+			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+			for(Stats stat: arrayList)
+			{
+				bufferedWriter.write(stat.getPlayer());
+				bufferedWriter.write("-");
+				bufferedWriter.write(Integer.toString(stat.getWin()));
+				bufferedWriter.write("-");
+				bufferedWriter.write(Integer.toString(stat.getTime()));
+				bufferedWriter.write("-");
+				bufferedWriter.write(Integer.toString(stat.getProperties()));
+				bufferedWriter.write("-");
+				bufferedWriter.write(Integer.toString(stat.getSupplies()));
+				bufferedWriter.newLine();
+			}          
+
+			bufferedWriter.close();
 		}
 		catch(IOException ex) {
-			System.out.println(
-					"Error reading file '"  + file.getName() + "'.");                  
+			System.out.println( "Error writing to file '" + file.getName() + "'.");
 		}
+
+	}
+}
+
+class Stats implements Comparable<Stats>{
+	
+	private String player;
+	private int win;
+	private int time;
+	private int properties;
+	private int supplies; 
+	
+	Stats(String player,int win, int time, int properties, int supplies)
+	{
+		this.player = player;
+		this.win = win;
+		this.time = time;
+		this.properties = properties;
+		this.supplies = supplies;
+	}
+	public String getPlayer()
+	{
+		return this.player;
+	}
+	public int getWin()
+	{
+		return this.win;
+	}
+	public int getTime()
+	{
+		return this.time;
+	}
+	public int getProperties()
+	{
+		return this.properties;
+	}
+	public int getSupplies()
+	{
+		return this.supplies;
+	}
+	@Override
+	public int compareTo(Stats compareStat){
 		
+		int compareVictory = compareStat.getWin();
+		if(compareVictory != this.win)
+		{
+			return compareVictory-this.win;
+		}
+		else //compareVictory == this.win
+		{
+			int compareTime = compareStat.getTime();
 		
-		
-		
-		
+			if(compareTime != this.time){
+				return compareTime-this.time;
+			}
+			else //compareVictory == this.win && compareTime == this.time
+			{
+				int compareProperties = compareStat.getProperties();
+				
+				if(compareProperties != this.properties){
+					return compareProperties-this.properties;
+				}
+				else{ //compareVictory == this.win && compareTime == this.time && compareProperties == this.properties
+					int compareSupplies = compareStat.getSupplies();
+					if(compareSupplies != this.supplies){
+						return compareSupplies-this.supplies;
+					}
+					else{ // all fields are the same.  Put in alphabetical order by player name
+						String playerString = compareStat.getPlayer();
+						return (1-playerString.compareTo(this.player));
+					
+					}
+				}	
+			}
+		}
+	}
+	
+	@Override
+	public String toString(){
+		return "[ name=" + this.player + ", win=" + this.win + ", time=" + this.time + ", properties=" + this.properties
+				+ ", supplies=" + this.supplies + " ]";
 	}
 }
