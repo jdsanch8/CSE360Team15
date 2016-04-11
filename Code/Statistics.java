@@ -11,7 +11,7 @@ public class Statistics {
 	private int days;
 	private int buildings;
 	private int resources;
-    // note: file will be created (if it doesn't already exist.  Will be placed in project FOLDER
+    // note: file will be created (if it doesn't already exist)  Will be placed in project FOLDER
 	private String filename = "g15.txt";
 	private String workingDirectory = System.getProperty("user.dir");
 	private File file = new File(workingDirectory, filename);
