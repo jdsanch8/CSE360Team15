@@ -10,7 +10,7 @@ public class Game{
 	private int wood;
 	private int stone;
 	private Dice dieClass;
-	
+
 	private Buildings myBuildings;
 	//private Stats gameStats = new Stats();
 
@@ -64,14 +64,14 @@ public class Game{
 		System.out.println("0) Exit Game");
 	}
 
-	private static int getMenuChoice() 
+	private static int getMenuChoice()
 	{
 		System.out.print("---> ");
 		while(! in.hasNextInt() )
 		{
 			in.nextLine();
 			System.out.print("---> ");
-		}	
+		}
 		int menuChoice = in.nextInt();
 		return menuChoice;
 	}
@@ -102,24 +102,24 @@ public class Game{
 			setDays(getDays() + 1);
 			inGameOptions();
 			break;
-			
+
 		case 2:
 			printBuildings();
-			int choice = getMenuChoice();	
+			int choice = getMenuChoice();
 			build();
 			inGameOptions();
 			break;
-			
+
 		case 3:
 			displayInGameHelp();
 			inGameOptions();
 			break;
-			
+
 		case 0:
-			
+
 			break;
 		default:
-			
+
 			break;
 		}
 	}
@@ -163,7 +163,7 @@ public class Game{
 	private void displayInGameHelp(){
 		System.out.println("");
 	}
-	
+
 	private void printBuildings(){
 		if(!myBuildings.getMine()){
 			System.out.println("1. Mine. Cost: 5 Wood 0 Stone");
@@ -173,6 +173,7 @@ public class Game{
 		}
 		if(!myBuildings.getHouse()){
 			System.out.println("3. House. Cost: 5 Wood 5 Stone");
+
 		}
 		if(!myBuildings.getFence()){
 			System.out.println("4. Fence. Cost: 5 Wood 2 Stone");
@@ -182,39 +183,43 @@ public class Game{
 		}
 		if(myBuildings.getHouse() && myBuildings.getFence() && myBuildings.getWell()){
 			System.out.println("5. Farm. Cost: TBD");
-		}		
+		}
 	}
-	
+
 	private void build(int choice){
 		switch (choice)
 		case 1:
 			if(!myBuildings.getMine()){
 				if(!myBuildings.buildMine())
-					System.out.println("Not enough resources");					
+					System.out.println("Not enough resources");
 			}
-			
+
 		case 2:
 			if(!myBuildings.get()){
 				if(!myBuildings.buildMill())
 					System.out.println("Not enough resources");
 			}
-			
+
 		case 3:
 			if(!myBuildings.getHouse()){
 				if(!myBuildings.buildHouse())
 					System.out.println("Not enough resources");
+				else
+					Dice.upGradeMulti();
 			}
-			
+
 		case 4:
 			if(!myBuildings.getFence()){
 				if(!myBuildings.buildFence())
 					System.out.println("Not enough resources");
+				else
+					Dice.deGradeDespairMulti();
 			}
 		case 5:
 			if(myBuildings.getHouse() && myBuildings.getFence() && myBuildings.getWell()){
 				if(!myBuildings.buildFarm())
 					System.out.println("Not enough resources");
-			}	
+			}
 	}
 
 	private void event(int eventIn){
@@ -235,8 +240,8 @@ public class Game{
 	}
 
 	private void displayCurrentGameStats(){
-		//System.out.println("Name: " + getName() + "\t\tDays:" + getDays() + "\t\tFarm: " + myBuildings.getStructureStatus(farm) + "\t\tHouse: " + myBuildings.getStructureStatus(house) + 
-		//"\t\tWell: " + myBuildings.getStructureStatus(well) + "\t\tFence: " + myBuildings.getStructureStatus(fence) + "\t\tMill: " + myBuildings.getStructureStatus(mill) + "\t\tMine: " 
+		//System.out.println("Name: " + getName() + "\t\tDays:" + getDays() + "\t\tFarm: " + myBuildings.getStructureStatus(farm) + "\t\tHouse: " + myBuildings.getStructureStatus(house) +
+		//"\t\tWell: " + myBuildings.getStructureStatus(well) + "\t\tFence: " + myBuildings.getStructureStatus(fence) + "\t\tMill: " + myBuildings.getStructureStatus(mill) + "\t\tMine: "
 		//+ myBuildings.getStructureStatus(Mine));
 	}
 
