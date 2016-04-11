@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
-//Version Apr 10.1
+//Version Apr 10.2
 public class Statistics {
 	
 	private String playerName;
@@ -11,8 +11,10 @@ public class Statistics {
 	private int days;
 	private int buildings;
 	private int resources;
-    // note: create txt file of this name and place in same package.  Program will automatically create a file in /bin directory
-	private File file = new File(getClass().getResource("group15.txt").getFile());
+    // note: file will be created (if it doesn't already exist.  Will be placed in project FOLDER
+	private String filename = "g15.txt";
+	private String workingDirectory = System.getProperty("user.dir");
+	private File file = new File(workingDirectory, filename);
 	
 	public Statistics(String playerName) 
 	{
