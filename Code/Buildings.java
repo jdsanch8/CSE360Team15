@@ -18,34 +18,40 @@ public class Buildings {
 	}
 	
 	//setters
-	public void buildHouse(int stone, int wood)
+	public boolean buildHouse(int stone, int wood)
 	{
-		if(stone == 5 && wood == 5)
+		if(stone <= 5 && wood <= 5)
 			house = true;
+		return house;
 	}
 	
-	public void buildFence(int stone, int wood)
+	public boolean buildFence(int stone, int wood)
 	{
-		if(stone == 2 && wood == 5)
+		if(stone <= 2 && wood <= 5)
 			fence = true;
+		return house;
 	}
 	
-	public void buildWell(int stone, int wood)
+	public boolean buildWell(int stone, int wood)
 	{
-		if(stone == 5 && wood == 2)
+		if(stone <= 5 && wood <= 2)
 			well = true;
+		return well;
 	}
 	
-	public void buildMill(int stone, int wood)
+	public boolean buildMill(int stone, int wood)
 	{
-		if(stone == 5 && wood == 0)
+		if(stone <= 5 && wood <= 0)
 			mill = true;
+		return mill;
+		
 	}
 	
-	public void buildMine(int stone, int wood)
+	public boolean buildMine(int stone, int wood)
 	{
 		if(stone == 0 && wood == 5)
 			mine = true;
+		return mine;
 	}
 	
 	//getters
