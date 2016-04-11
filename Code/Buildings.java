@@ -3,7 +3,6 @@
  * @version April 11, 2016
  * 
  */
-
 public class Buildings {
 	
 	private boolean house;
