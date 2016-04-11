@@ -6,6 +6,7 @@ public class Buildings {
 	private boolean well;
 	private boolean mill;
 	private boolean mine;
+	private boolean farm;
 	
 	//constructor
 	public Buildings()
@@ -15,6 +16,7 @@ public class Buildings {
 		well = false;
 		mill = false;
 		mine = false;
+		farm = false;
 	}
 	
 	//setters
@@ -54,6 +56,13 @@ public class Buildings {
 		return mine;
 	}
 	
+	public boolean buildfarm(int stone, int wood, int food)
+	{
+		if(stone >= 3 && wood >= 3 && food >= 3)
+			farm = true;
+		return farm;
+	}
+	
 	//getters
 	public boolean getHouse()
 	{
@@ -78,6 +87,11 @@ public class Buildings {
 	public boolean getMine()
 	{
 		return mine;
+	}
+	
+	public boolean getFarm()
+	{
+		return farm;
 	}
 	
 }
