@@ -42,14 +42,16 @@ public class Buildings {
 	public boolean buildHouse(int stone, int wood){
 		
 		// Checks if it is already built
-		if(!houseBuilt){
-			
+		if(houseBuilt){
+			return false;
+		}
+		else{
 			// Checks if the necessary resources are available for construction
 			if(stone >= 5 && wood >= 5){
 				house = true;
 			}
-		}
 		return house;
+		}
 	}
 
 	/** Sets fence variable to true if the requirements are met
@@ -59,14 +61,17 @@ public class Buildings {
 	public boolean buildFence(int stone, int wood){
 		
 		// Checks if it is already built
-		if(!fenceBuilt){
-			
+		if(fenceBuilt){
+			return false;
+		}
+		else{
+		
 			// Checks if the necessary resources are available for construction
 			if(stone >= 2 && wood >= 5){
 				fence = true;
 			}
+		return fence;
 		}
-		return house;
 	}
 	
 	/** Sets well variable to true if the requirements are met
@@ -76,14 +81,16 @@ public class Buildings {
 	public boolean buildWell(int stone, int wood){
 		
 		// Checks if it is already built
-		if(!wellBuilt){
-			
+		if(wellBuilt){
+			return false;
+		}
+		else{
 			// Checks if the necessary resources are available for construction
 			if(stone >= 5 && wood >= 2){
 				well = true;
 			}
-		}
 		return well;
+		}
 	}
 	
 	/** Sets mill variable to true if the requirements are met
@@ -93,14 +100,16 @@ public class Buildings {
 	public boolean buildMill(int stone, int wood){
 		
 		// Checks if it is already built
-		if(!millBuilt){
-			
+		if(millBuilt){
+			return false;
+		}
+		else{
 			// Checks if the necessary resources are available for construction
 			if(stone >= 5){
 				mill = true;
 			}
-		}
-			return mill;		
+		return mill;
+		}		
 	}
 	
 	/** Sets mine variable to true if the requirements are met
@@ -110,14 +119,16 @@ public class Buildings {
 	public boolean buildMine(int stone, int wood){
 		
 		// Checks if it is already built
-		if(!mineBuilt){
-			
+		if(mineBuilt){
+			return false;
+		}
+		else{
 			// Checks if the necessary resources are available for construction
 			if(wood >= 5){
 				mine = true;
 			}
-		}
 		return mine;
+		}
 	}
 	
 	/** Sets farm variable to true if the requirements are met
