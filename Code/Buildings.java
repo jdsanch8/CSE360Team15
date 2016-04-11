@@ -49,6 +49,7 @@ public class Buildings {
 			// Checks if the necessary resources are available for construction
 			if(stone >= 5 && wood >= 5){
 				house = true;
+				houseBuilt = true;
 			}
 		return house;
 		}
@@ -69,6 +70,7 @@ public class Buildings {
 			// Checks if the necessary resources are available for construction
 			if(stone >= 2 && wood >= 5){
 				fence = true;
+				fenceBuilt = true;
 			}
 		return fence;
 		}
@@ -88,6 +90,7 @@ public class Buildings {
 			// Checks if the necessary resources are available for construction
 			if(stone >= 5 && wood >= 2){
 				well = true;
+				wellBuilt = true;
 			}
 		return well;
 		}
@@ -107,6 +110,7 @@ public class Buildings {
 			// Checks if the necessary resources are available for construction
 			if(stone >= 5){
 				mill = true;
+				millBuilt = true;
 			}
 		return mill;
 		}		
@@ -126,6 +130,7 @@ public class Buildings {
 			// Checks if the necessary resources are available for construction
 			if(wood >= 5){
 				mine = true;
+				mineBuilt = true;
 			}
 		return mine;
 		}
