@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
-//Version Apr 10.2
+//Version Apr 11.0
 public class Statistics {
 	
 	private String playerName;
@@ -11,13 +11,12 @@ public class Statistics {
 	private int days;
 	private int buildings;
 	private int resources;
-    // note: file will be created (if it doesn't already exist)  Will be placed in project FOLDER
+    // note: file will be created (if it doesn't already exist.)  Will be placed in project FOLDER
 	private String filename = "g15.txt";
 	private String workingDirectory = System.getProperty("user.dir");
 	private File file = new File(workingDirectory, filename);
 	
-	public Statistics(String playerName) 
-	{
+	public Statistics(String playerName) {
 		this.victory = 0;
 		this.days = 0;
 		this.buildings = 0;
@@ -33,8 +32,7 @@ public class Statistics {
 		}
 	}
 
-	public void printFile()
-	{
+	public void printFile(){
 		String line = null;
 
 		try {
@@ -53,28 +51,44 @@ public class Statistics {
 		}
 	}
 	
-	public void setVictory (int victory)
-	{
+	public void setVictory (int victory){
 		this.victory = victory;
 	}
 	
-	public void setDays (int days)
-	{
+	public void setDays (int days){
 		this.days = days;
 	}
 	
-	public void setBuildings (int buildings)
-	{
+	public void setBuildings (int buildings){
 		this.buildings = buildings;
 	}
 	
-	public void setResources (int resources)
-	{
+	public void setResources (int resources){
 		this.resources = resources;
 	}
 	
-	public void writeToFile()
-	{
+	//for JUnit testing purposes only:
+	public String getPlayerName() {
+		return this.playerName;
+	}
+	public int getVictory (){
+		return victory;
+	}
+	
+	public int getDays (){
+		return days;
+	}
+	
+	public int getBuildings (){
+		return buildings;
+	}
+	
+	public int getResources (){
+		return resources;
+	}
+	//end JUnit methods
+	
+	public void writeToFile(){
 		
 		try {
 			
@@ -100,12 +114,14 @@ public class Statistics {
         }
 	}
 	
-	public ArrayList<Stats> makeArrayList()
-	{
+	public ArrayList<Stats> makeArrayList(){
 		ArrayList<Stats> list = new ArrayList<Stats>();
 		String token [];
-		String player; int win; int time; int properties; int supplies;
-
+		String player; 
+		int win; 
+		int time; 
+		int properties; 
+		int supplies;
 		String line = null;
 
 		try {
@@ -118,7 +134,6 @@ public class Statistics {
 				//parse out each term.  put in an index of arrayList
 				token = line.split("-");
 				player = token[0];
-
 				win = Integer.parseInt(token[1]);
 				time = Integer.parseInt(token[2]);
 				properties = Integer.parseInt(token[3]);
@@ -151,8 +166,7 @@ public class Statistics {
 			FileWriter fileWriter = new FileWriter(file.getAbsoluteFile(), false); //append is false
 
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-			for(Stats stat: arrayList)
-			{
+			for(Stats stat: arrayList){
 				bufferedWriter.write(stat.getPlayer());
 				bufferedWriter.write("-");
 				bufferedWriter.write(Integer.toString(stat.getWin()));
@@ -182,74 +196,66 @@ class Stats implements Comparable<Stats>{
 	private int properties;
 	private int supplies; 
 	
-	Stats(String player,int win, int time, int properties, int supplies)
-	{
+	Stats(String player,int win, int time, int properties, int supplies){
 		this.player = player;
 		this.win = win;
 		this.time = time;
 		this.properties = properties;
 		this.supplies = supplies;
 	}
-	public String getPlayer()
-	{
+	public String getPlayer(){
 		return this.player;
 	}
-	public int getWin()
-	{
+	public int getWin(){
 		return this.win;
 	}
-	public int getTime()
-	{
+	public int getTime(){
 		return this.time;
 	}
-	public int getProperties()
-	{
+	public int getProperties(){
 		return this.properties;
 	}
-	public int getSupplies()
-	{
+	public int getSupplies(){
 		return this.supplies;
 	}
 	@Override
 	public int compareTo(Stats compareStat){
 		
 		int compareVictory = compareStat.getWin();
-		if(compareVictory != this.win)
-		{
-			return compareVictory-this.win;
+		if(compareVictory != this.win){
+			return compareVictory - this.win;
 		}
-		else //compareVictory == this.win
-		{
+		else{ //compareVictory == this.win
 			int compareTime = compareStat.getTime();
 		
 			if(compareTime != this.time){
-				return compareTime-this.time;
+				return compareTime - this.time;
 			}
-			else //compareVictory == this.win && compareTime == this.time
-			{
+			else{ //compareVictory == this.win && compareTime == this.time
+			
 				int compareProperties = compareStat.getProperties();
 				
 				if(compareProperties != this.properties){
-					return compareProperties-this.properties;
+					return compareProperties - this.properties;
 				}
 				else{ //compareVictory == this.win && compareTime == this.time && compareProperties == this.properties
 					int compareSupplies = compareStat.getSupplies();
 					if(compareSupplies != this.supplies){
-						return compareSupplies-this.supplies;
+						return compareSupplies - this.supplies;
 					}
 					else{ // all fields are the same.  Put in alphabetical order by player name
 						String playerString = compareStat.getPlayer();
-						return (1-playerString.compareTo(this.player));
-					
+						return (1 - playerString.compareTo(this.player));
 					}
 				}	
 			}
 		}
 	}
 	
+	//debug purposes only
 	@Override
 	public String toString(){
-		return "[ name=" + this.player + ", win=" + this.win + ", time=" + this.time + ", properties=" + this.properties
-				+ ", supplies=" + this.supplies + " ]";
-	}
+		return "name=" + this.player + ", win=" + this.win + ", time=" + this.time + ", properties=" + this.properties
+				+ ", supplies=" + this.supplies;
+	} 
 }
