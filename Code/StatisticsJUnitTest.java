@@ -246,15 +246,15 @@ public class StatisticsJUnitTest {
 		
 		Collections.sort(list);
 		// Collections.sort(list) will test CompareTo method too! (B/c sorting list based on entries uses compareTo @Override)
-		assertEquals("name=Name Highscore, win=1, time=7, properties=7, supplies=7", list.get(0).toString());
-		assertEquals("name=NameB, win=1, time=7, properties=4, supplies=9", list.get(1).toString());//testing correctness of arrayList sort
-		assertEquals("name=NameA, win=1, time=4, properties=9, supplies=9", list.get(2).toString());//testing correctness of arrayList sort
-		assertEquals("name=NameX, win=1, time=4, properties=5, supplies=1", list.get(3).toString());//testing correctness of arrayList sort
-		assertEquals("name=NameZ, win=1, time=4, properties=4, supplies=9", list.get(4).toString());//testing correctness of arrayList sort
-		assertEquals("name=NameH, win=1, time=2, properties=5, supplies=3", list.get(5).toString());//testing correctness of arrayList sort
-		assertEquals("name=NameG, win=1, time=2, properties=5, supplies=1", list.get(6).toString());//testing correctness of arrayList sort
-		assertEquals("name=PlayerName, win=1, time=2, properties=3, supplies=4", list.get(7).toString());//testing correctness of arrayList sort
-		assertEquals("name=Name, win=1, time=1, properties=1, supplies=1", list.get(8).toString());//testing correctness of arrayList sort
+		assertEquals("name=Name Highscore, win=1, time=7, properties=7, supplies=7", list.get(7).toString());
+		assertEquals("name=NameB, win=1, time=7, properties=4, supplies=9", list.get(8).toString());//testing correctness of arrayList sort
+		assertEquals("name=NameA, win=1, time=4, properties=9, supplies=9", list.get(4).toString());//testing correctness of arrayList sort
+		assertEquals("name=NameX, win=1, time=4, properties=5, supplies=1", list.get(5).toString());//testing correctness of arrayList sort
+		assertEquals("name=NameZ, win=1, time=4, properties=4, supplies=9", list.get(6).toString());//testing correctness of arrayList sort
+		assertEquals("name=NameH, win=1, time=2, properties=5, supplies=3", list.get(1).toString());//testing correctness of arrayList sort
+		assertEquals("name=NameG, win=1, time=2, properties=5, supplies=1", list.get(2).toString());//testing correctness of arrayList sort
+		assertEquals("name=PlayerName, win=1, time=2, properties=3, supplies=4", list.get(3).toString());//testing correctness of arrayList sort
+		assertEquals("name=Name, win=1, time=1, properties=1, supplies=1", list.get(0).toString());//testing correctness of arrayList sort
 		assertEquals("name=Name Aa, win=0, time=10, properties=10, supplies=10", list.get(9).toString());//testing correctness of arrayList sort
 		assertEquals("name=Name Zz, win=0, time=10, properties=10, supplies=10", list.get(10).toString());//testing correctness of arrayList sort
 		assertEquals("name=Name Failure, win=0, time=9, properties=9, supplies=9", list.get(11).toString());//testing correctness of arrayList sort
