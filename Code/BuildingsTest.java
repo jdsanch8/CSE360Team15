@@ -2,7 +2,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-/** Allows buildings to be constructed given set circumstances, and tracks which buildings are built
+/** Tests the Buildings class for different cases.
  * @author 
  * @version April 11, 2016
  * 
