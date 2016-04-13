@@ -18,7 +18,7 @@ cost - stone:5 wood:5
 Fence - Decreases the thief’s chance of stealing wood, stone, or food
 cost - stone:2 wood:5
 
-Well - Reduces the amount of food lost per turn from 3 to 2
+Well - Deduces the amount of food lost per turn from 3 to 2
 cost - stone:5 wood:2
 
 Optional Buildings:
@@ -32,9 +32,16 @@ Winning Building:
 Farm - Final structure
 cost - stone:3 wood:3 food:3
 
-
 Winning the game:
 Once a farm has been successfully built, you have won the game.
 
 Losing the game:
 If a farm cannot be made by the time your food has run out, you have lost.
+
+---Statistics---
+*victory (yes or no)
+*days
+*buildings
+*resources
+*alphabetical order
+The most important statistic used for ranking is victory (i.e., did the player win or lose?).  If multiple players all won (or lost) the next category looked at for ranking is days.  If victory and days are the same, the next category for ranking is buildings made.  If all three statistics are the same, the next statistic for ranking is resources.  Lastly, if all categories are the same, the ranking is sorted alphabetically by the player's name.
