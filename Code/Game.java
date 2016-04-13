@@ -1,3 +1,8 @@
+/**
+ * Holds all of the resource values, and promts the user through the game. Acts of main class that connects
+ * all of the other classes
+ */
+
 import java.util.Scanner;
 
 public class Game{
@@ -16,6 +21,10 @@ public class Game{
 	private Buildings myBuildings;
 	private Statistics gameStats;
 
+	/**
+	 * Constructor method
+	 * @param playerNameIn entered name of user
+	 */
 	public Game(String playerNameIn){
 		setName(playerNameIn);
 		setDays(0);
@@ -30,6 +39,9 @@ public class Game{
 		buildingCount = 0;
 	}
 
+	/**
+	 * Acts as the main menu, with various options including play now, view stats, and see help
+	 */
 	public void gameController(){
 		System.out.println("Enter Dice Game Name Here!");
 		startScreen();
@@ -60,6 +72,9 @@ public class Game{
 		}
 	}
 
+	/**
+	 * Prints out menu explaining options
+	 */
 	private void startScreen(){
 		System.out.println("----------------------------");
 		System.out.println("Hello, " + getName() + ", please select an option(Enter digit):");
@@ -69,6 +84,10 @@ public class Game{
 		System.out.println("0) Exit Game");
 	}
 
+	/**
+	 * Reads in input until a valid response is received
+	 * @return integer containing user choice
+	 */
 	private static int getMenuChoice()
 	{
 		System.out.print("---> ");
@@ -81,11 +100,17 @@ public class Game{
 		return menuChoice;
 	}
 
+	/**
+	 * Calls methods that begin the game
+	 */
 	private void startGame(){
 		setupEnvironment();
 		inGameOptions();
 	}
 
+	/**
+	 * Contains a list of choices the player can make during the course of the game
+	 */
 	private void inGameOptions(){
 		displayCurrentGameStats();
 		displayInGameOptions();
@@ -129,6 +154,9 @@ public class Game{
 		}
 	}
 
+	/**
+	 * Prints the menu for the player containing their options
+	 */
 	private void displayInGameOptions(){
 		System.out.println("----------------------------");
 		System.out.println("1) Let's Rock & Roll");
@@ -137,6 +165,9 @@ public class Game{
 		System.out.println("0) Quit Current Game");
 	}
 
+	/**
+	 * Allows the player to choose their inital starting conditions, granting them a boon
+	 */
 	private void setupEnvironment(){
 		System.out.println("Select your environment.\nForest will provide you with 5 wood to start and Mountains will provide you with 5 stone to start.\nWhat will it be?(1 = Forest, 2 = Mountains)");
 		int menuChoice = getMenuChoice();
@@ -154,6 +185,9 @@ public class Game{
 		}
 	}
 
+	/**
+	 * Provides an explanation on how to play the game
+	 */
 	private void helpScreen(){
 		System.out.println("Game Objective\n\nThe objective of the game is to build a farm. In order to gain the ability to do this, "
 				+ "you first need to build a house, a well, and a fence. You can build these structures by using your resources of, "
@@ -165,10 +199,16 @@ public class Game{
 				+ "yields food, wood or stone. Let's get building!");
 	}
 
+	/**
+	 * New Line
+	 */
 	private void displayInGameHelp(){
 		System.out.println("");
 	}
 
+	/**
+	 * Prints a list of unbuilt buildings, and the cost to build them
+	 */
 	private void printBuildings(){
 		if(!myBuildings.getMine()){
 			System.out.println("1. Mine. Cost: 5 Wood 0 Stone");
@@ -191,6 +231,10 @@ public class Game{
 		}
 	}
 
+	/**
+	 * Builds a building depending on the users choice
+	 * @param choice number corresponding with the building they want, given to them by print buildings
+	 */
 	private void build(int choice){
 		switch (choice){
 		case 1:
@@ -263,6 +307,9 @@ public class Game{
 		}
 	}
 
+	/**
+	 * Displays their current resources, days, and buildings
+	 */
 	private void displayCurrentGameStats(){
 		System.out.println("Name: " + playerName);
 		System.out.println("Days: " + days);
@@ -274,58 +321,114 @@ public class Game{
 		System.out.println();
 	}
 
+	/**
+	 * Setter Method for name
+	 * @param nameIn name of Player
+	 */
 	private void setName(String nameIn){
 		playerName = nameIn;
 	}
 
+	/**
+	 * Setter method for enviroment
+	 * @param environmentIn chosen enviroment
+	 */
 	private void setEnvironment(int environmentIn){
 		environment = environmentIn;
 	}
 
+	/**
+	 * Setter method for days
+	 * @param daysIn number of days
+	 */
 	public void setDays(int daysIn){
 		days = daysIn;
 	}
 
+	/**
+	 * Setter method for food
+	 * @param foodIn number of food
+	 */
 	public void setFood(int foodIn){
 		food = foodIn;
 	}
 
+	/**
+	 * Setter method for buildings
+	 * @param buildingsIn number of buildings
+	 */
 	public void setBuildings(int buildingsIn){
 		buildings = buildingsIn;
 	}
 
+	/**
+	 * Setter method for wood
+	 * @param woodIn number of wood
+	 */
 	public void setWood(int woodIn){
 		wood = woodIn;
 	}
 
+	/**
+	 * Setter method for Stone
+	 * @param stoneIn number of stone
+	 */
 	public void setStone(int stoneIn){
 		stone = stoneIn;
 	}
 
+	/**
+	 * Getter method for name
+	 * @return User' Name
+	 */
 	public String getName(){
 		return playerName;
 	}
 
+	/**
+	 * Getter method for enviroment
+	 * @return number corresponding with chosen enviroment
+	 */
 	public int getEnvironment(){
 		return environment;
 	}
 
+	/**
+	 * Getter method for days
+	 * @return number of days that have passed
+	 */
 	public int getDays(){
 		return days;
 	}
 
+	/**
+	 * Getter Method for food
+	 * @return amount of food
+	 */
 	public int getFood(){
 		return food;
 	}
 
+	/**
+	 * Getter method for buildings
+	 * @return number of buildings
+	 */
 	public int getBuildings(){
 		return buildings;
 	}
 
+	/**
+	 * Getter method for wood
+	 * @return amount of wood
+	 */
 	public int getWood(){
 		return wood;
 	}
 
+	/**
+	 * Getter method for stone
+	 * @return amount of stone
+	 */
 	public int getStone(){
 		return stone;
 	}

@@ -1,4 +1,6 @@
-//Test1
+/**
+ * Generators random results, and modifies the values in the game object accordingly
+ */
 
 import java.util.Random;
 
@@ -11,7 +13,10 @@ public class Dice{
 	boolean badLuck;
 	boolean house;
 	boolean fence;
-
+	
+	/**
+	 * Constructor, sets initial values to false, and multiplier to 6
+	 */
 	public Dice(){
 		roller = new Random();
 		multipler = 6;
@@ -20,7 +25,10 @@ public class Dice{
 		fence = false;
 		goodLuck = false;
 	}
-
+	/**
+	 * Rolls a die, depending on size of multipler, and returns the result
+	 * @return the randomly generated integer value
+	 */
 	public int rollMultiplier(){ //Returns Multiplier
 		int tempValue = 0;
 		if(goodLuck){
@@ -39,6 +47,11 @@ public class Dice{
 		return tempValue;
 	}
 
+	/**
+	 * Rolls a die that can only provide wood
+	 * @param mult value rolled from multipler die
+	 * @param config game containing the resource information
+	 */
 	public void rollWood(int mult, Game config){ //Access game class
 		int value = roller.nextInt() % DICE_SIZE + 1;
 		if(value <= 4){
@@ -47,6 +60,11 @@ public class Dice{
 		}
 	}
 
+	/**
+	 * Rolls a die that can only provide stone
+	 * @param mult value rolled from multipler die
+	 * @param config game containing the resource information
+	 */
 	public void rollStone(int mult, Game config){ //Access game class
 		int value = roller.nextInt() % DICE_SIZE + 1;
 			if(value <= 4){
@@ -55,6 +73,11 @@ public class Dice{
 			}
 	}
 
+	/**
+	 * Rolls the starting die, that can provide various boons and banes
+	 * @param mult value rolled from multipler die
+	 * @param config game containing the resource information
+	 */
 	public void rollBase(int mult, Game config){ //Access Game Class
 		int value = roller.nextInt() % DICE_SIZE + 1;
 		switch (value){
@@ -80,7 +103,12 @@ public class Dice{
 		}
 
 	}
-
+	
+	/**
+	 * If despiar is rolled on base die, this triggers something bad to happen
+	 * @param mult value rolled from multipler die
+	 * @param config game containing the resource information
+	 */
 	private void rollDespair(int mult, Game config){ //Access Game Class
 		if(fence)
 			mult = mult/2;
@@ -112,7 +140,12 @@ public class Dice{
 					break;
 				}
 	}
-
+	
+	/**
+	 * If skill is rolled on base die, this triggers something good to happen
+	 * @param mult value rolled from multipler die
+	 * @param config game containing the resource information
+	 */
 	private void rollSkill(int mult, Game config){ //Access Game Class
 		int value = roller.nextInt() % DICE_SIZE + 1;
 		switch (value){
@@ -141,11 +174,17 @@ public class Dice{
 		}
 	}
 
+	/**
+	 * When a house is built, the mutiplier die becomes a d8 instead of a d6
+	 */
 	public void upGradeMulti(){ //When house is built
 		multipler += 2;
 		house = true;
 	}
 
+	/**
+	 * When a fence is built, it reduces the effects of the despair
+	 */
 	public void deGradeDespairMulti(){ //When fence is built
 		fence = true;
 	}
