@@ -100,7 +100,7 @@ public class Buildings {
 	 *  @param stone	integer resource checked
 	 *  @param wood		integer resource checked
 	 */
-	public boolean buildMill(int stone, int wood){
+	public boolean buildMill(int stone){
 		
 		// Checks if it is already built
 		if(millBuilt){
@@ -120,7 +120,7 @@ public class Buildings {
 	 *  @param stone	integer resource checked
 	 *  @param wood		integer resource checked
 	 */
-	public boolean buildMine(int stone, int wood){
+	public boolean buildMine(int wood){
 		
 		// Checks if it is already built
 		if(mineBuilt){
@@ -141,7 +141,7 @@ public class Buildings {
 	 *  @param wood		integer resource checked
 	 *  @param food		integer resource checked
 	 */
-	public boolean buildfarm(int stone, int wood, int food){
+	public boolean buildFarm(int stone, int wood, int food){
 		
 		// Checks if it is already built
 		if(houseBuilt && fenceBuilt && wellBuilt){
