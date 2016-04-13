@@ -237,51 +237,74 @@ public class Game{
 				if(!myBuildings.buildMine(wood))
 					System.out.println("Not enough resources");
 				else{
+					wood -= 5;
 					builtBuildings[buildingCount] = "Mine";
 					buildingCount++;
 				}
 			}
-
+			break;
 		case 2:
 			if(!myBuildings.getMill()){
 				if(!myBuildings.buildMill(stone))
 					System.out.println("Not enough resources");
 				else{
+					stone -= 5;
 					builtBuildings[buildingCount] = "Mill";
 					buildingCount++;
 				}
 			}
-
+			break;
 		case 3:
 			if(!myBuildings.getHouse()){
 				if(!myBuildings.buildHouse(stone, wood))
 					System.out.println("Not enough resources");
 				else{
+					stone -= 5;
+					wood -= 5;
 					dieClass.upGradeMulti();
 					builtBuildings[buildingCount] = "House";
 					buildingCount++;
 				}
 			}
-
+			break;
 		case 4:
 			if(!myBuildings.getFence()){
 				if(!myBuildings.buildFence(stone, wood))
 					System.out.println("Not enough resources");
 				else{
+					stone -= 2;
+					wood -= 5;
 					dieClass.deGradeDespairMulti();
 					builtBuildings[buildingCount] = "Fence";
 					buildingCount++;
 				}
 			}
 		case 5:
+			if(myBuildings.getWell()){
+				if(!myBuildings.buildWell(stone, wood))
+					System.out.println("Not enough resources");
+				else{
+					stone -= 5;
+					wood -= 2;
+					builtBuildings[buildingCount] = "Well";
+					buildingCount++;
+				}
+			}
+			break;
+
+		case 6:
 			if(myBuildings.getHouse() && myBuildings.getFence() && myBuildings.getWell()){
 				if(!myBuildings.buildFarm(stone, wood, food))
 					System.out.println("Not enough resources");
 				else{
+					stone -= 3;
+					wood -= 3;
+					food -= 3;
 					builtBuildings[buildingCount] = "Farm";
 					buildingCount++;
 				}
 			}
+			break;
 		}
 	}
 
@@ -427,15 +450,15 @@ public class Game{
 	public int getStone(){
 		return stone;
 	}
-	
+
 	public void updateStone(int stoneIn){
 		stone = stone + stoneIn;
 	}
-	
+
 	public void updateWood(int woodIn){
 		wood = wood + woodIn;
 	}
-	
+
 	public void updateFood(int foodIn){
 		food = food + foodIn;
 	}
