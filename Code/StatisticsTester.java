@@ -9,7 +9,7 @@ public class StatisticsTester{
 		// hard-coding player name for testing purposes
 		String playerName = "Greg Benjamin";
 		
-		//*****Note: player name cannot contain '-'
+		//*****Note: player name cannot contain '~'
 		Statistics statObj = new Statistics(playerName); // use this constructor after you get player name.
 		
 		
