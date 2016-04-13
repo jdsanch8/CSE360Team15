@@ -44,7 +44,7 @@ public class Dice{
 			else
 				multipler = 6;
 		}
-		System.out.println("\nYou've rolled" + tempValue);
+		System.out.println("\nYou've rolled " + tempValue);
 		return tempValue;
 	}
 
@@ -98,7 +98,7 @@ public class Dice{
 			break;
 		case 5:
 		case 6:
-			config.setFood(mult);
+			config.updateFood(mult);
 			System.out.println("The workers have produced " + mult + " food!");
 			break;
 		}
