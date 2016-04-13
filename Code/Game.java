@@ -1,8 +1,3 @@
-/**
- * Holds all of the resource values, and promts the user through the game. Acts of main class that connects
- * all of the other classes
- */
-
 import java.util.Scanner;
 
 public class Game{
@@ -431,5 +426,17 @@ public class Game{
 	 */
 	public int getStone(){
 		return stone;
+	}
+	
+	public void updateStone(int stoneIn){
+		stone = stone + stoneIn;
+	}
+	
+	public void updateWood(int woodIn){
+		wood = wood + woodIn;
+	}
+	
+	public void updateFood(int foodIn){
+		food = food + foodIn;
 	}
 }
