@@ -12,6 +12,7 @@ public class Game{
 	private Dice dieClass;
 	private String[] builtBuildings;
 	int buildingCount;
+	int foodDec;
 
 	private Buildings myBuildings;
 	private Statistics gameStats;
@@ -32,6 +33,7 @@ public class Game{
 		gameStats = new Statistics(playerNameIn);
 		builtBuildings = new String[5];
 		buildingCount = 0;
+		foodDec = 3;
 	}
 
 	/**
@@ -126,6 +128,7 @@ public class Game{
 			dieClass.rollBase(mult, this);
 			setDays(getDays() + 1);
 			inGameOptions();
+			food -= foodDec;
 			break;
 
 		case 2:
@@ -288,6 +291,7 @@ public class Game{
 					wood -= 2;
 					builtBuildings[buildingCount] = "Well";
 					buildingCount++;
+					foodDec = 2;
 				}
 			}
 			break;

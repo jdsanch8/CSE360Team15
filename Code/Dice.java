@@ -116,12 +116,23 @@ public class Dice{
 		int value = Math.abs(roller.nextInt()) % DICE_SIZE + 1;
 				switch (value){
 				case 1:
-					System.out.println("The thief has stolen " + mult + " wood!");
-					config.updateWood(-mult);
+					if(config.getWood() < mult){
+						config.setWood(0);
+						System.out.println("The thief has stolen all the wood!");
+					else{
+						System.out.println("The thief has stolen " + mult + " wood!");
+						config.updateWood(-mult);
+					}
 					break;
 				case 2:
-					System.out.println("The thief has stolen " + mult + " stone!");
-					config.updateStone(-mult);
+					if(config.getStone() < mult){
+						config.setStone(0);
+						System.out.println("The thief has stolen all the stone!");
+					}
+					else(
+						System.out.println("The thief has stolen " + mult + " stone!");
+						config.updateStone(-mult);
+					}
 					break;
 				case 3:
 					System.out.println("The thief has stolen " + mult + " food!");
@@ -129,9 +140,24 @@ public class Dice{
 					break;
 				case 4:
 					System.out.println("The thief has stolen " + mult + " of everything!");
-					config.updateWood(-mult);
-					config.updateStone(-mult);
-					config.updateFood(-mult);
+					if(config.getWood() < mult){
+						config.setWood(0);
+					}
+					else{
+						config.updateWood(-mult);
+					}
+					if(config.getStone() < mult){
+						config.setStone(0);
+					}
+					else{
+						config.updateStone(-mult);
+					}
+					if(config.getFood() < mult){
+						config.setFood(0);
+					}
+					else{
+						config.updateFood(-mult);
+					}
 					break;
 				case 5:
 				case 6:
