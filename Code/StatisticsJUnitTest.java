@@ -11,6 +11,8 @@ import java.util.Collections;
 
 import org.junit.Test;
 
+//Version April 13
+
 public class StatisticsJUnitTest {
 	@Test
 	public void testStatisticsConstructor() {
@@ -162,23 +164,23 @@ public class StatisticsJUnitTest {
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 			//writing two lines to file.  Testing correctness with assert functions
 			bufferedWriter.write("Testing");
-			bufferedWriter.write("-");
+			bufferedWriter.write("~");
 			bufferedWriter.write(Integer.toString(1));
-			bufferedWriter.write("-");
+			bufferedWriter.write("~");
 			bufferedWriter.write(Integer.toString(2));
-			bufferedWriter.write("-");
+			bufferedWriter.write("~");
 			bufferedWriter.write(Integer.toString(3));
-			bufferedWriter.write("-");
+			bufferedWriter.write("~");
 			bufferedWriter.write(Integer.toString(4));
 			bufferedWriter.newLine();
 			bufferedWriter.write("UnitTesting");
-			bufferedWriter.write("-");
+			bufferedWriter.write("~");
 			bufferedWriter.write(Integer.toString(4));
-			bufferedWriter.write("-");
+			bufferedWriter.write("~");
 			bufferedWriter.write(Integer.toString(3));
-			bufferedWriter.write("-");
+			bufferedWriter.write("~");
 			bufferedWriter.write(Integer.toString(2));
-			bufferedWriter.write("-");
+			bufferedWriter.write("~");
 			bufferedWriter.write(Integer.toString(1));
 			bufferedWriter.newLine();
 			bufferedWriter.close();
@@ -192,9 +194,9 @@ public class StatisticsJUnitTest {
 			FileReader fileReader = new FileReader(file.getAbsoluteFile());
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			content = bufferedReader.readLine();
-			assertEquals("Testing-1-2-3-4", content); //checking sure file matches what was written
+			assertEquals("Testing~1~2~3~4", content); //checking sure file matches what was written
 			content = bufferedReader.readLine();
-			assertEquals("UnitTesting-4-3-2-1", content);//checking sure file matches what was written
+			assertEquals("UnitTesting~4~3~2~1", content);//checking sure file matches what was written
 			content = bufferedReader.readLine();
 			assertNull(content); //checking to make sure end of file content
 			
@@ -215,9 +217,9 @@ public class StatisticsJUnitTest {
 		String time; 
 		String properties; 
 		String supplies;
-		String line = "PlayerName-1-2-3-4"; //test line of text from txt file
+		String line = "PlayerName~1~2~3~4"; //test line of text from txt file
 
-		token = line.split("-");
+		token = line.split("~");
 		player = token[0];
 		assertEquals("PlayerName", player); //test parse of string
 		win = token[1];
@@ -285,13 +287,13 @@ public class StatisticsJUnitTest {
 			//writing list content to file
 			for(Stats stat: list){
 				bufferedWriter.write(stat.getPlayer());
-				bufferedWriter.write("-");
+				bufferedWriter.write("~");
 				bufferedWriter.write(Integer.toString(stat.getWin()));
-				bufferedWriter.write("-");
+				bufferedWriter.write("~");
 				bufferedWriter.write(Integer.toString(stat.getTime()));
-				bufferedWriter.write("-");
+				bufferedWriter.write("~");
 				bufferedWriter.write(Integer.toString(stat.getProperties()));
-				bufferedWriter.write("-");
+				bufferedWriter.write("~");
 				bufferedWriter.write(Integer.toString(stat.getSupplies()));
 				bufferedWriter.newLine();
 			}          
@@ -306,13 +308,13 @@ public class StatisticsJUnitTest {
 			FileReader fileReader = new FileReader(file.getAbsoluteFile());
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			content = bufferedReader.readLine();
-			assertEquals("List-1-7-2-1", content); //testing if list correctly written to file
+			assertEquals("List~1~7~2~1", content); //testing if list correctly written to file
 			content = bufferedReader.readLine();
-			assertEquals("Writing-1-10-2-3", content); //testing if list correctly written to file
+			assertEquals("Writing~1~10~2~3", content); //testing if list correctly written to file
 			content = bufferedReader.readLine();
-			assertEquals("To-0-9-6-6", content); //testing if list correctly written to file
+			assertEquals("To~0~9~6~6", content); //testing if list correctly written to file
 			content = bufferedReader.readLine();
-			assertEquals("File-0-4-9-9", content); //testing if list correctly written to file
+			assertEquals("File~0~4~9~9", content); //testing if list correctly written to file
 			content = bufferedReader.readLine();
 			assertNull(content); //testing that list correctly stopped writing to file at its end
 			
