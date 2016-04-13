@@ -13,7 +13,7 @@ import java.util.Collections;
  * are looked at).  Lastly, if all statistics are the same, the listing is done in alphabetical order.
  * 
  * @author Gregory Benjamin 
- * @version April 11, v.3
+ * @version April 13, v.3
  */
 
 public class Statistics {
@@ -145,13 +145,13 @@ public class Statistics {
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
 			bufferedWriter.write(this.playerName);
-			bufferedWriter.write("-");
+			bufferedWriter.write("~");
 			bufferedWriter.write(Integer.toString(this.victory));
-			bufferedWriter.write("-");
+			bufferedWriter.write("~");
 			bufferedWriter.write(Integer.toString(this.days));
-			bufferedWriter.write("-");
+			bufferedWriter.write("~");
 			bufferedWriter.write(Integer.toString(this.buildings));
-			bufferedWriter.write("-");
+			bufferedWriter.write("~");
 			bufferedWriter.write(Integer.toString(this.resources));
 			bufferedWriter.newLine();
 			bufferedWriter.close();
@@ -187,7 +187,7 @@ public class Statistics {
 			while((line = bufferedReader.readLine()) != null) {
 
 				//parse out each term.  put in an index of arrayList
-				token = line.split("-");
+				token = line.split("~");
 				player = token[0];
 				win = Integer.parseInt(token[1]);
 				time = Integer.parseInt(token[2]);
@@ -221,13 +221,13 @@ public class Statistics {
 			
 			for(Stats stat: arrayList){
 				bufferedWriter.write(stat.getPlayer());
-				bufferedWriter.write("-");
+				bufferedWriter.write("~");
 				bufferedWriter.write(Integer.toString(stat.getWin()));
-				bufferedWriter.write("-");
+				bufferedWriter.write("~");
 				bufferedWriter.write(Integer.toString(stat.getTime()));
-				bufferedWriter.write("-");
+				bufferedWriter.write("~");
 				bufferedWriter.write(Integer.toString(stat.getProperties()));
-				bufferedWriter.write("-");
+				bufferedWriter.write("~");
 				bufferedWriter.write(Integer.toString(stat.getSupplies()));
 				bufferedWriter.newLine();
 			}          
