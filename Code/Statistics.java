@@ -6,8 +6,9 @@ import java.util.Collections;
  * Class Statistics collects player name, statistic of a win or loss by player, days survived by player, buildings made by player, and 
  * resources made by player.  The class creates or appends a data file of these statistics in the folder of the java project.  More specifically,
  * the class writes to the data text file with a specific order of sorting.  That is, a victory has the highest weight for sorting (a 1 always
- * scores higher than a 0).  The next highest weight for sorting is for days survived. For example, if multiple players have victories, the player with the 
- * most days survived will be ranked higher.  The next highest weight for sorting is for buildings made (if victory and days are the same, the player
+ * scores higher than a 0).  The next highest weight for sorting is for days. For example, if multiple players have victory = 1, the player who completes 
+ * the game the quickest will have a higher rank (i.e., smallest day value).  Conversely, if multiple players have losses (victory = 0), then the player 
+ * that survives the longest will have a higher rank (i.e., the largest day value).  The next highest weight for sorting is for buildings made (if victory and days are the same, the player
  * with more buildings will be ranked higher).  The least weighted statistic is resources (if all other statistics are the same, resources
  * are looked at).  Lastly, if all statistics are the same, the listing is done in alphabetical order.
  * 
@@ -319,35 +320,41 @@ class Stats implements Comparable<Stats>{
 	/**
 	 * compareTo overrides compareTo function for use that is specific to this program's requirements:
 	 * A victory has the highest weight for sorting (a 1 always scores higher than a 0).  
-	 * The next highest weight for sorting is for days survived. For example, if multiple players have victories, the player with the 
-	 * most days survived will be ranked higher.  The next highest weight for sorting is for buildings made (if victory and days are the same,
-	 * the player with more buildings will be ranked higher).  The least weighted statistic is resources (if all other statistics are the same, 
-	 * resources are looked at).  Lastly, if all statistics are the same, the listing is done in alphabetical order.  
+	 * The next highest weight for sorting is for days. For example, if multiple players have victory = 1, the player who completes 
+	 * the game the quickest will have a higher rank (i.e., smallest day value).  Conversely, if multiple players have losses (victory = 0), then the player 
+	 * that survives the longest will have a higher rank (i.e., the largest day value).  The next highest weight for sorting is for buildings made 
+	 * (if victory and days are the same, the player with more buildings will be ranked higher).  The least weighted statistic is resources 
+	 * (if all other statistics are the same, resources are looked at).  Lastly, if all statistics are the same, the listing is done in alphabetical order.  
 	 * @param compareStat of type Stats is being compared to the instance of Stats class that is associated with the compareTo method.
 	 */
 
 	@Override
 	public int compareTo(Stats compareStat){
 
-		int compareVictory = compareStat.getWin();
+		int compareVictory = compareStat.getWin(); // victory has the highest weight for sorting
 		if(compareVictory != this.win){
 			return compareVictory - this.win;
 		}
 		else{ //compareVictory == this.win
-			int compareTime = compareStat.getTime();
+			int compareTime = compareStat.getTime(); // days has the next highest weight for sorting
 
 			if(compareTime != this.time){
-				return compareTime - this.time;
+				if (compareVictory == 0){
+					return compareTime - this.time; // if player has victory = 0, the player with the higher amount of days has higher rank
+				}
+				else{ // compareVictory = 1
+					return this.time - compareTime; // if player has victory = 1, the player with the smaller amount of days has higher rank
+				}
 			}
 			else{ //compareVictory == this.win && compareTime == this.time
 
-				int compareProperties = compareStat.getProperties();
+				int compareProperties = compareStat.getProperties();  // buildings have the next highest weight for sorting
 
 				if(compareProperties != this.properties){
 					return compareProperties - this.properties;
 				}
 				else{ //compareVictory == this.win && compareTime == this.time && compareProperties == this.properties
-					int compareSupplies = compareStat.getSupplies();
+					int compareSupplies = compareStat.getSupplies();  // resources have the next highest weight for sorting
 					if(compareSupplies != this.supplies){
 						return compareSupplies - this.supplies;
 					}
