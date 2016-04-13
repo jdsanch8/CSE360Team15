@@ -1,5 +1,5 @@
 ----Game Explanation----
-You’re in a race against time. With a limited supply of food. Prevent your people from dying
+Youâ€™re in a race against time. With a limited supply of food. Prevent your people from dying
 of hunger by ultimately building a farm to save the town.
 
 ----Rules----
@@ -15,10 +15,10 @@ Required Buildings:
 House - Increases the potential maximum amount of wood or stone received per turn from 4 to 6
 cost - stone:5 wood:5
 
-Fence - Decreases the thief’s chance of stealing wood, stone, or food
+Fence - Decreases the thiefâ€™s chance of stealing wood, stone, or food
 cost - stone:2 wood:5
 
-Well - Deduces the amount of food lost per turn from 3 to 2
+Well - Reduces the amount of food lost per turn from 3 to 2
 cost - stone:5 wood:2
 
 Optional Buildings:
