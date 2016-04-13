@@ -9,10 +9,12 @@ public class Game{
 	private int buildings;
 	private int wood;
 	private int stone;
-	//private Dice eventDie = new Dice(event);
-	//private Dice multiplierDie = new Dice(multiplier);
-	//private Buildings myBuildings = new Buildings();
-	//private Stats gameStats = new Stats();
+	private Dice dieClass;
+	private String[] builtBuildings;
+	int buildingCount;
+
+	private Buildings myBuildings;
+	private Statistics gameStats;
 
 	public Game(String playerNameIn){
 		setName(playerNameIn);
@@ -21,6 +23,11 @@ public class Game{
 		setBuildings(0);
 		setWood(0);
 		setStone(0);
+		dieClass = new Dice();
+		myBuildings = new Buildings();
+		gameStats = new Statistics(playerNameIn);
+		builtBuildings = new String[5];
+		buildingCount = 0;
 	}
 
 	public void gameController(){
@@ -38,8 +45,8 @@ public class Game{
 			gameController();
 			break;
 		case 2:
-			//gameStats.viewStats();
-			//gameController();
+			gameStats.printFile();
+			gameController();
 			break;
 		case 3:
 			helpScreen();
@@ -62,14 +69,14 @@ public class Game{
 		System.out.println("0) Exit Game");
 	}
 
-	private static int getMenuChoice() 
+	private static int getMenuChoice()
 	{
 		System.out.print("---> ");
 		while(! in.hasNextInt() )
 		{
 			in.nextLine();
 			System.out.print("---> ");
-		}	
+		}
 		int menuChoice = in.nextInt();
 		return menuChoice;
 	}
@@ -82,6 +89,7 @@ public class Game{
 	private void inGameOptions(){
 		displayCurrentGameStats();
 		displayInGameOptions();
+		int mult;
 		int menuChoice = getMenuChoice();
 		while (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 0){
 			System.out.println("*** Invalid menu choice! Please enter 1, 2, 3, or 0 ***");
@@ -90,21 +98,33 @@ public class Game{
 		}
 		switch(menuChoice){
 		case 1:
-			//event(eventDie.rollDice());
+			mult = dieClass.rollMultiplier();
+			if(myBuildings.getMill())
+				dieClass.rollWood(mult, this);
+			if(myBuildings.getMine())
+				dieClass.rollStone(mult, this);
+			dieClass.rollBase(mult, this);
 			setDays(getDays() + 1);
 			inGameOptions();
 			break;
+
 		case 2:
-			//updateResources(myBuildings.build());
+			printBuildings();
+			int choice = in.nextInt();
+			build(choice);
 			inGameOptions();
 			break;
+
 		case 3:
 			displayInGameHelp();
 			inGameOptions();
 			break;
+
 		case 0:
+
 			break;
 		default:
+
 			break;
 		}
 	}
@@ -149,6 +169,83 @@ public class Game{
 		System.out.println("");
 	}
 
+	private void printBuildings(){
+		if(!myBuildings.getMine()){
+			System.out.println("1. Mine. Cost: 5 Wood 0 Stone");
+		}
+		if(!myBuildings.getMill()){
+			System.out.println("2. Mill. Cost: 0 Wood 5 Stone");
+		}
+		if(!myBuildings.getHouse()){
+			System.out.println("3. House. Cost: 5 Wood 5 Stone");
+
+		}
+		if(!myBuildings.getFence()){
+			System.out.println("4. Fence. Cost: 5 Wood 2 Stone");
+		}
+		if(!myBuildings.getWell()){
+			System.out.println("5. Well. Cost: 2 Wood 5 Stone");
+		}
+		if(myBuildings.getHouse() && myBuildings.getFence() && myBuildings.getWell()){
+			System.out.println("5. Farm. Cost: TBD");
+		}
+	}
+
+	private void build(int choice){
+		switch (choice){
+		case 1:
+			if(!myBuildings.getMine()){
+				if(!myBuildings.buildMine(wood))
+					System.out.println("Not enough resources");
+				else{
+					builtBuildings[buildingCount] = "Mine";
+					buildingCount++;
+				}
+			}
+
+		case 2:
+			if(!myBuildings.getMill()){
+				if(!myBuildings.buildMill(stone))
+					System.out.println("Not enough resources");
+				else{
+					builtBuildings[buildingCount] = "Mill";
+					buildingCount++;
+				}
+			}
+
+		case 3:
+			if(!myBuildings.getHouse()){
+				if(!myBuildings.buildHouse(stone, wood))
+					System.out.println("Not enough resources");
+				else{
+					dieClass.upGradeMulti();
+					builtBuildings[buildingCount] = "House";
+					buildingCount++;
+				}
+			}
+
+		case 4:
+			if(!myBuildings.getFence()){
+				if(!myBuildings.buildFence(stone, wood))
+					System.out.println("Not enough resources");
+				else{
+					dieClass.deGradeDespairMulti();
+					builtBuildings[buildingCount] = "Fence";
+					buildingCount++;
+				}
+			}
+		case 5:
+			if(myBuildings.getHouse() && myBuildings.getFence() && myBuildings.getWell()){
+				if(!myBuildings.buildFarm(stone, wood, food))
+					System.out.println("Not enough resources");
+				else{
+					builtBuildings[buildingCount] = "Farm";
+					buildingCount++;
+				}
+			}
+		}
+	}
+
 	private void event(int eventIn){
 		switch(eventIn){
 		case 1:
@@ -167,9 +264,14 @@ public class Game{
 	}
 
 	private void displayCurrentGameStats(){
-		//System.out.println("Name: " + getName() + "\t\tDays:" + getDays() + "\t\tFarm: " + myBuildings.getStructureStatus(farm) + "\t\tHouse: " + myBuildings.getStructureStatus(house) + 
-		//"\t\tWell: " + myBuildings.getStructureStatus(well) + "\t\tFence: " + myBuildings.getStructureStatus(fence) + "\t\tMill: " + myBuildings.getStructureStatus(mill) + "\t\tMine: " 
-		//+ myBuildings.getStructureStatus(Mine));
+		System.out.println("Name: " + playerName);
+		System.out.println("Days: " + days);
+		System.out.println("Food: " + food + "\t Wood: " + wood + "\t Stone: " + stone);
+		System.out.println("Build Buildings:");
+		for (int loop = 0; loop < buildingCount; loop++){
+			System.out.println(builtBuildings[loop]);
+		}
+		System.out.println();
 	}
 
 	private void setName(String nameIn){
