@@ -24,16 +24,16 @@ public class Game{
 	public Game(String playerNameIn){
 		setName(playerNameIn);
 		setDays(0);
-		setFood(0);
+		setFood(45);
 		setBuildings(0);
 		setWood(0);
 		setStone(0);
 		dieClass = new Dice();
 		myBuildings = new Buildings();
 		gameStats = new Statistics(playerNameIn);
-		builtBuildings = new String[5];
+		builtBuildings = new String[6];
 		buildingCount = 0;
-		foodDec = 3;
+		foodDec = -3;
 	}
 
 	/**
@@ -112,12 +112,14 @@ public class Game{
 		displayCurrentGameStats();
 		displayInGameOptions();
 		int mult;
+		
 		int menuChoice = getMenuChoice();
 		while (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 0){
 			System.out.println("*** Invalid menu choice! Please enter 1, 2, 3, or 0 ***");
 			displayInGameOptions();
 			menuChoice = getMenuChoice();
 		}
+		
 		switch(menuChoice){
 		case 1:
 			mult = dieClass.rollMultiplier();
@@ -127,15 +129,21 @@ public class Game{
 				dieClass.rollStone(mult, this);
 			dieClass.rollBase(mult, this);
 			setDays(getDays() + 1);
-			inGameOptions();
-			food -= foodDec;
+			updateFood(foodDec);
+			if(getFood() > 0)
+				inGameOptions();
+			else
+				System.out.println("You lose due to a lack of food!");
 			break;
 
 		case 2:
 			printBuildings();
-			int choice = in.nextInt();
+			int choice = getMenuChoice();
 			build(choice);
-			inGameOptions();
+			if(myBuildings.getFarm())
+				System.out.println("You win!");
+			else
+				inGameOptions();
 			break;
 
 		case 3:
@@ -187,13 +195,13 @@ public class Game{
 	 * Provides an explanation on how to play the game
 	 */
 	private void helpScreen(){
-		System.out.println("Game Objective\n\nThe objective of the game is to build a farm. In order to gain the ability to do this, "
-				+ "you first need to build a house, a well, and a fence. You can build these structures by using your resources of, "
-				+ "wood and stone, which are acquired through each dice roll. If you choose to build the optional structures, mill "
-				+ "and mine, you can receive additional resources on each dice roll. The mill will provide additional wood and the "
-				+ "mine will provide additional stone. Additionally, on each dice roll, you consume food and once you run out of food "
-				+ "the game ends. You can limit your food losses by building a well. A fence will limit your resource losses in the "
-				+ "event that your roll yields a disaster and a house will increase your acquired resources in the event that your roll "
+		System.out.println("Game Objective\n\nThe objective of the game is to build a farm. In order to gain the ability to do this,\n"
+				+ "you first need to build a house, a well, and a fence. You can build these structures by using your resources of,\n"
+				+ "wood and stone, which are acquired through each dice roll. If you choose to build the optional structures, mill\n"
+				+ "and mine, you can receive additional resources on each dice roll. The mill will provide additional wood and the\n"
+				+ "mine will provide additional stone. Additionally, on each dice roll, you consume food and once you run out of food\n"
+				+ "the game ends. You can limit your food losses by building a well. A fence will limit your resource losses in the\n"
+				+ "event that your roll yields a disaster and a house will increase your acquired resources in the event that your roll\n"
 				+ "yields food, wood or stone. Let's get building!");
 	}
 
@@ -225,7 +233,7 @@ public class Game{
 			System.out.println("5. Well. Cost: 2 Wood 5 Stone");
 		}
 		if(myBuildings.getHouse() && myBuildings.getFence() && myBuildings.getWell()){
-			System.out.println("5. Farm. Cost: TBD");
+			System.out.println("6. Farm. Cost: TBD");
 		}
 	}
 
@@ -282,8 +290,9 @@ public class Game{
 					buildingCount++;
 				}
 			}
+			break;
 		case 5:
-			if(myBuildings.getWell()){
+			if(!myBuildings.getWell()){
 				if(!myBuildings.buildWell(stone, wood))
 					System.out.println("Not enough resources");
 				else{
@@ -291,7 +300,7 @@ public class Game{
 					wood -= 2;
 					builtBuildings[buildingCount] = "Well";
 					buildingCount++;
-					foodDec = 2;
+					foodDec = -2;
 				}
 			}
 			break;
@@ -312,23 +321,6 @@ public class Game{
 		}
 	}
 
-	private void event(int eventIn){
-		switch(eventIn){
-		case 1:
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		case 4:
-			break;
-		case 6:
-			break;
-		default:
-			break;
-		}
-	}
-
 	/**
 	 * Displays their current resources, days, and buildings
 	 */
@@ -336,7 +328,7 @@ public class Game{
 		System.out.println("Name: " + playerName);
 		System.out.println("Days: " + days);
 		System.out.println("Food: " + food + "\t Wood: " + wood + "\t Stone: " + stone);
-		System.out.println("Build Buildings:");
+		System.out.println("Built Buildings:");
 		for (int loop = 0; loop < buildingCount; loop++){
 			System.out.println(builtBuildings[loop]);
 		}
