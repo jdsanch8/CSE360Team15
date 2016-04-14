@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class GameDriver {
 
-	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		boolean continuePlaying = true;
@@ -14,5 +13,7 @@ public class GameDriver {
 			Game myGame = new Game(playerName);
 			continuePlaying = myGame.gameController();
 		}
+		
+		in.close();
 	}
 }
