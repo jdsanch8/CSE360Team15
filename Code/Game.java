@@ -1,8 +1,10 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Game{
 	private static Scanner in = new Scanner(System.in);
 	private String playerName;
+	private int victory;
 	private int environment;
 	private int days;
 	private int food;
@@ -13,7 +15,7 @@ public class Game{
 	private String[] builtBuildings;
 	int buildingCount;
 	int foodDec;
-
+	private ArrayList<Stats> statisticsList;
 	private Buildings myBuildings;
 	private Statistics gameStats;
 
@@ -39,8 +41,10 @@ public class Game{
 	/**
 	 * Acts as the main menu, with various options including play now, view stats, and see help
 	 */
-	public void gameController(){
-		System.out.println("Enter Dice Game Name Here!");
+	public int gameController(){
+		int continuePlaying = 0;
+		System.out.println("---------------------------");
+		System.out.println("Insert Dice Game Name Here!");
 		startScreen();
 		int menuChoice = getMenuChoice();
 		while (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 0){
@@ -51,7 +55,7 @@ public class Game{
 		switch(menuChoice){
 		case 1:
 			startGame();
-			gameController();
+			continuePlaying = 1;
 			break;
 		case 2:
 			gameStats.printFile();
@@ -63,10 +67,12 @@ public class Game{
 			break;
 		case 0:
 			System.out.println("Exiting game. Goodbye.");
+			continuePlaying = 0;
 			break;
 		default:
 			break;
 		}
+		return continuePlaying;
 	}
 
 	/**
@@ -112,14 +118,14 @@ public class Game{
 		displayCurrentGameStats();
 		displayInGameOptions();
 		int mult;
-		
+
 		int menuChoice = getMenuChoice();
 		while (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 0){
 			System.out.println("*** Invalid menu choice! Please enter 1, 2, 3, or 0 ***");
 			displayInGameOptions();
 			menuChoice = getMenuChoice();
 		}
-		
+
 		switch(menuChoice){
 		case 1:
 			mult = dieClass.rollMultiplier();
@@ -132,16 +138,28 @@ public class Game{
 			updateFood(foodDec);
 			if(getFood() > 0)
 				inGameOptions();
-			else
+			else{
 				System.out.println("You lose due to a lack of food!");
+				victory = 0;
+				updateRecord();
+				gameStats.writeToFile();
+				statisticsList = gameStats.makeArrayList();
+				gameStats.writeListToFile(statisticsList);
+			}
 			break;
 
 		case 2:
 			printBuildings();
 			int choice = getMenuChoice();
 			build(choice);
-			if(myBuildings.getFarm())
+			if(myBuildings.getFarm()){
 				System.out.println("You win!");
+				victory = 1;
+				updateRecord();
+				gameStats.writeToFile();
+				statisticsList = gameStats.makeArrayList();
+				gameStats.writeListToFile(statisticsList);
+			}
 			else
 				inGameOptions();
 			break;
@@ -321,6 +339,13 @@ public class Game{
 		}
 	}
 
+	private void updateRecord(){
+		gameStats.setVictory(victory);
+		gameStats.setDays(days);
+		gameStats.setBuildings(buildingCount);
+		gameStats.setResources(wood + stone + food);
+	}
+
 	/**
 	 * Displays their current resources, days, and buildings
 	 */
@@ -449,13 +474,19 @@ public class Game{
 
 	public void updateStone(int stoneIn){
 		stone = stone + stoneIn;
+		if (stone < 0)
+			stone = 0;
 	}
 
 	public void updateWood(int woodIn){
 		wood = wood + woodIn;
+		if (wood < 0)
+			wood = 0;
 	}
 
 	public void updateFood(int foodIn){
 		food = food + foodIn;
+		if (food < 0)
+			food = 0;
 	}
 }
