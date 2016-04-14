@@ -44,7 +44,7 @@ public class Game{
 	public int gameController(){
 		int continuePlaying = 0;
 		System.out.println("---------------------------");
-		System.out.println("Insert Dice Game Name Here!");
+		System.out.println("Mayor's Town");
 		startScreen();
 		int menuChoice = getMenuChoice();
 		while (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 0){
@@ -54,8 +54,8 @@ public class Game{
 		}
 		switch(menuChoice){
 		case 1:
-			startGame();
 			continuePlaying = 1;
+			startGame();			
 			break;
 		case 2:
 			gameStats.printFile();
@@ -235,23 +235,23 @@ public class Game{
 	 */
 	private void printBuildings(){
 		if(!myBuildings.getMine()){
-			System.out.println("1. Mine. Cost: 5 Wood 0 Stone");
+			System.out.println("1. Mine. Cost: 5 Wood, 0 Stone");
 		}
 		if(!myBuildings.getMill()){
-			System.out.println("2. Mill. Cost: 0 Wood 5 Stone");
+			System.out.println("2. Mill. Cost: 0 Wood, 5 Stone");
 		}
 		if(!myBuildings.getHouse()){
-			System.out.println("3. House. Cost: 5 Wood 5 Stone");
+			System.out.println("3. House. Cost: 5 Wood, 5 Stone");
 
 		}
 		if(!myBuildings.getFence()){
-			System.out.println("4. Fence. Cost: 5 Wood 2 Stone");
+			System.out.println("4. Fence. Cost: 5 Wood, 2 Stone");
 		}
 		if(!myBuildings.getWell()){
-			System.out.println("5. Well. Cost: 2 Wood 5 Stone");
+			System.out.println("5. Well. Cost: 2 Wood, 5 Stone");
 		}
 		if(myBuildings.getHouse() && myBuildings.getFence() && myBuildings.getWell()){
-			System.out.println("6. Farm. Cost: TBD");
+			System.out.println("6. Farm. Cost: 3 Wood, 3 Stone, 3 Food");
 		}
 	}
 
