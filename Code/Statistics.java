@@ -24,7 +24,7 @@ public class Statistics {
 	private int buildings;
 	private int resources;
 	private String filename = "group15stats.txt";// note: file will be created (if it doesn't already exist.)  Will be placed in project FOLDER
-	private String workingDirectory = System.getProperty("user.dir");
+	private String workingDirectory = System.getProperty("user.home");
 	private File file = new File(workingDirectory, filename);
 
 	/**
