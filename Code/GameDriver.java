@@ -11,7 +11,6 @@ public class GameDriver {
 			String playerName = in.next();
 			Game myGame = new Game(playerName);
 			continuePlaying = myGame.gameController();
-			System.out.println(continuePlaying);
 		}
 	}
 }

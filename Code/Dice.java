@@ -159,8 +159,8 @@ public class Dice{
 			config.setStone((int)(config.getStone()*1.5));
 			break;
 		case 3:
-			System.out.println("Fate favors you, and the gods have increased food by " + mult);
-			config.updateFood(mult);
+			System.out.println("Fate favors you, and the gods have increased food by 10%.");
+			config.setFood((int)(config.getFood()*1.1));
 			break;
 		case 4:
 			System.out.println("Fate favors you, and the gods have increased everything by " + mult);
@@ -189,5 +189,21 @@ public class Dice{
 	 */
 	public void deGradeDespairMulti(){ //When fence is built
 		fence = true;
+	}
+	
+	public boolean getHouse(){
+		return house;
+	}
+	
+	public boolean getFence(){
+		return fence;
+	}
+	
+	public boolean getGoodLuck(){
+		return goodLuck;
+	}
+	
+	public boolean getBadLuck(){
+		return badLuck;
 	}
 }

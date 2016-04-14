@@ -259,7 +259,7 @@ public class Game{
 	 * Builds a building depending on the users choice
 	 * @param choice number corresponding with the building they want, given to them by print buildings
 	 */
-	private void build(int choice){
+	public void build(int choice){
 		switch (choice){
 		case 1:
 			if(!myBuildings.getMine()){
@@ -488,5 +488,9 @@ public class Game{
 		food = food + foodIn;
 		if (food < 0)
 			food = 0;
+	}
+	
+	public Dice getDice(){
+		return dieClass;
 	}
 }
