@@ -41,8 +41,8 @@ public class Game{
 	/**
 	 * Acts as the main menu, with various options including play now, view stats, and see help
 	 */
-	public int gameController(){
-		int continuePlaying = 0;
+	public boolean gameController(){
+		boolean continuePlaying = true;
 		System.out.println("---------------------------");
 		System.out.println("Mayor's Town");
 		startScreen();
@@ -54,20 +54,20 @@ public class Game{
 		}
 		switch(menuChoice){
 		case 1:
-			continuePlaying = 1;
+			continuePlaying = true;
 			startGame();			
 			break;
 		case 2:
 			gameStats.printFile();
-			gameController();
+			continuePlaying = gameController();
 			break;
 		case 3:
 			helpScreen();
-			gameController();
+			continuePlaying = gameController();
 			break;
 		case 0:
+			continuePlaying = false;
 			System.out.println("Exiting game. Goodbye.");
-			continuePlaying = 0;
 			break;
 		default:
 			break;
