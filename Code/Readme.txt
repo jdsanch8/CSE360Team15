@@ -1,5 +1,5 @@
 ----Game Explanation----
-You’re in a race against time. With a limited supply of food. Prevent your people from dying
+You’re in a race against time with a limited supply of food. Prevent your people from dying
 of hunger by ultimately building a farm to save the town.
 
 ----Rules----
