@@ -55,7 +55,7 @@ public class Game{
 		switch(menuChoice){
 		case 1:
 			continuePlaying = true;
-			startGame();			
+			startGame();
 			break;
 		case 2:
 			gameStats.printFile();
@@ -129,15 +129,18 @@ public class Game{
 		switch(menuChoice){
 		case 1:
 			mult = dieClass.rollMultiplier();
-			if(myBuildings.getMill())
+			if(myBuildings.getMill()){
 				dieClass.rollWood(mult, this);
-			if(myBuildings.getMine())
+			}
+			if(myBuildings.getMine()){
 				dieClass.rollStone(mult, this);
+			}
 			dieClass.rollBase(mult, this);
 			setDays(getDays() + 1);
 			updateFood(foodDec);
-			if(getFood() > 0)
+			if(getFood() > 0){
 				inGameOptions();
+			}
 			else{
 				System.out.println("You lose due to a lack of food!");
 				victory = 0;
@@ -160,8 +163,9 @@ public class Game{
 				statisticsList = gameStats.makeArrayList();
 				gameStats.writeListToFile(statisticsList);
 			}
-			else
+			else{
 				inGameOptions();
+			}
 			break;
 
 		case 3:
@@ -242,7 +246,6 @@ public class Game{
 		}
 		if(!myBuildings.getHouse()){
 			System.out.println("3. House. Cost: 5 Wood, 5 Stone");
-
 		}
 		if(!myBuildings.getFence()){
 			System.out.println("4. Fence. Cost: 5 Wood, 2 Stone");
@@ -263,8 +266,9 @@ public class Game{
 		switch (choice){
 		case 1:
 			if(!myBuildings.getMine()){
-				if(!myBuildings.buildMine(wood))
+				if(!myBuildings.buildMine(wood)){
 					System.out.println("Not enough resources");
+				}
 				else{
 					wood -= 5;
 					builtBuildings[buildingCount] = "Mine";
@@ -274,8 +278,9 @@ public class Game{
 			break;
 		case 2:
 			if(!myBuildings.getMill()){
-				if(!myBuildings.buildMill(stone))
+				if(!myBuildings.buildMill(stone)){
 					System.out.println("Not enough resources");
+				}
 				else{
 					stone -= 5;
 					builtBuildings[buildingCount] = "Mill";
@@ -285,8 +290,9 @@ public class Game{
 			break;
 		case 3:
 			if(!myBuildings.getHouse()){
-				if(!myBuildings.buildHouse(stone, wood))
+				if(!myBuildings.buildHouse(stone, wood)){
 					System.out.println("Not enough resources");
+				}
 				else{
 					stone -= 5;
 					wood -= 5;
@@ -298,8 +304,9 @@ public class Game{
 			break;
 		case 4:
 			if(!myBuildings.getFence()){
-				if(!myBuildings.buildFence(stone, wood))
+				if(!myBuildings.buildFence(stone, wood)){
 					System.out.println("Not enough resources");
+				}
 				else{
 					stone -= 2;
 					wood -= 5;
@@ -311,8 +318,9 @@ public class Game{
 			break;
 		case 5:
 			if(!myBuildings.getWell()){
-				if(!myBuildings.buildWell(stone, wood))
+				if(!myBuildings.buildWell(stone, wood)){
 					System.out.println("Not enough resources");
+				}
 				else{
 					stone -= 5;
 					wood -= 2;
@@ -325,8 +333,9 @@ public class Game{
 
 		case 6:
 			if(myBuildings.getHouse() && myBuildings.getFence() && myBuildings.getWell()){
-				if(!myBuildings.buildFarm(stone, wood, food))
+				if(!myBuildings.buildFarm(stone, wood, food)){
 					System.out.println("Not enough resources");
+				}
 				else{
 					stone -= 3;
 					wood -= 3;
@@ -472,24 +481,43 @@ public class Game{
 		return stone;
 	}
 
+	/**
+	* Adds stone to current amount
+	* @param stoneIn amount of stone to be added
+	*/
 	public void updateStone(int stoneIn){
 		stone = stone + stoneIn;
-		if (stone < 0)
+		if (stone < 0){
 			stone = 0;
+		}
 	}
 
+	/**
+	* Adds wood to current amount
+	* @param woodIn amount of wood to be added
+	*/
 	public void updateWood(int woodIn){
 		wood = wood + woodIn;
-		if (wood < 0)
+		if (wood < 0){
 			wood = 0;
+		}
 	}
 
+	/**
+	* Adds food to current amount
+	* @param foodIn amount of food to be added
+	*/
 	public void updateFood(int foodIn){
 		food = food + foodIn;
-		if (food < 0)
+		if (food < 0){
 			food = 0;
+		}
 	}
-	
+
+	/**
+	* Returns the intstance of dice used
+	* @return Dice class with updated values
+	*/
 	public Dice getDice(){
 		return dieClass;
 	}
