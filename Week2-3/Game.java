@@ -1,11 +1,16 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-
+/**
+ * Game class is the main game controller. It interacts with the Dice class, Buildings class,
+ * and Statistics class for all the game functions. It contains all the menus of the game 
+ * and functions to play the game. 
+ * @author Team15
+ */
 public class Game{
 	private static Scanner in = new Scanner(System.in);
 	private String playerName;
-	private int victory;
-	private int environment;
+	private int victory;	//(1 = win, 0 = loss)
+	private int environment;	//(1 = forest, 2 = mountains)
 	private int days;
 	private int food;
 	private int buildings;
@@ -14,7 +19,7 @@ public class Game{
 	private Dice dieClass;
 	private String[] builtBuildings;
 	int buildingCount;
-	int foodDec;
+	int foodDec;	//food loss after each roll
 	private ArrayList<Stats> statisticsList;
 	private Buildings myBuildings;
 	private Statistics gameStats;
@@ -40,6 +45,7 @@ public class Game{
 
 	/**
 	 * Acts as the main menu, with various options including play now, view stats, and see help
+	 * @return boolean indicating if the player wants to continue playing.
 	 */
 	public boolean gameController(){
 		boolean continuePlaying = true;
@@ -55,7 +61,7 @@ public class Game{
 		switch(menuChoice){
 		case 1:
 			continuePlaying = true;
-			startGame();
+			startGame();			
 			break;
 		case 2:
 			gameStats.printFile();
@@ -76,7 +82,7 @@ public class Game{
 	}
 
 	/**
-	 * Prints out menu explaining options
+	 * Prints out menu explaining main menu options
 	 */
 	private void startScreen(){
 		System.out.println("----------------------------");
@@ -127,20 +133,17 @@ public class Game{
 		}
 
 		switch(menuChoice){
-		case 1:
+		case 1:	//roll dice
 			mult = dieClass.rollMultiplier();
-			if(myBuildings.getMill()){
+			if(myBuildings.getMill())
 				dieClass.rollWood(mult, this);
-			}
-			if(myBuildings.getMine()){
+			if(myBuildings.getMine())
 				dieClass.rollStone(mult, this);
-			}
 			dieClass.rollBase(mult, this);
 			setDays(getDays() + 1);
 			updateFood(foodDec);
-			if(getFood() > 0){
+			if(getFood() > 0)
 				inGameOptions();
-			}
 			else{
 				System.out.println("You lose due to a lack of food!");
 				victory = 0;
@@ -151,7 +154,7 @@ public class Game{
 			}
 			break;
 
-		case 2:
+		case 2:	//build buildings
 			printBuildings();
 			int choice = getMenuChoice();
 			build(choice);
@@ -163,33 +166,25 @@ public class Game{
 				statisticsList = gameStats.makeArrayList();
 				gameStats.writeListToFile(statisticsList);
 			}
-			else{
+			else
 				inGameOptions();
-			}
 			break;
 
-		case 3:
-			displayInGameHelp();
-			inGameOptions();
+		case 0:	//quit game
 			break;
-
-		case 0:
-
-			break;
+			
 		default:
-
 			break;
 		}
 	}
 
 	/**
-	 * Prints the menu for the player containing their options
+	 * Prints the in-game menu for the player containing their options
 	 */
 	private void displayInGameOptions(){
 		System.out.println("----------------------------");
 		System.out.println("1) Let's Rock & Roll");
 		System.out.println("2) Build");
-		System.out.println("3) Help");
 		System.out.println("0) Quit Current Game");
 	}
 
@@ -228,13 +223,6 @@ public class Game{
 	}
 
 	/**
-	 * New Line
-	 */
-	private void displayInGameHelp(){
-		System.out.println("");
-	}
-
-	/**
 	 * Prints a list of unbuilt buildings, and the cost to build them
 	 */
 	private void printBuildings(){
@@ -246,6 +234,7 @@ public class Game{
 		}
 		if(!myBuildings.getHouse()){
 			System.out.println("3. House. Cost: 5 Wood, 5 Stone");
+
 		}
 		if(!myBuildings.getFence()){
 			System.out.println("4. Fence. Cost: 5 Wood, 2 Stone");
@@ -266,9 +255,8 @@ public class Game{
 		switch (choice){
 		case 1:
 			if(!myBuildings.getMine()){
-				if(!myBuildings.buildMine(wood)){
+				if(!myBuildings.buildMine(wood))
 					System.out.println("Not enough resources");
-				}
 				else{
 					wood -= 5;
 					builtBuildings[buildingCount] = "Mine";
@@ -278,9 +266,8 @@ public class Game{
 			break;
 		case 2:
 			if(!myBuildings.getMill()){
-				if(!myBuildings.buildMill(stone)){
+				if(!myBuildings.buildMill(stone))
 					System.out.println("Not enough resources");
-				}
 				else{
 					stone -= 5;
 					builtBuildings[buildingCount] = "Mill";
@@ -290,9 +277,8 @@ public class Game{
 			break;
 		case 3:
 			if(!myBuildings.getHouse()){
-				if(!myBuildings.buildHouse(stone, wood)){
+				if(!myBuildings.buildHouse(stone, wood))
 					System.out.println("Not enough resources");
-				}
 				else{
 					stone -= 5;
 					wood -= 5;
@@ -304,9 +290,8 @@ public class Game{
 			break;
 		case 4:
 			if(!myBuildings.getFence()){
-				if(!myBuildings.buildFence(stone, wood)){
+				if(!myBuildings.buildFence(stone, wood))
 					System.out.println("Not enough resources");
-				}
 				else{
 					stone -= 2;
 					wood -= 5;
@@ -318,9 +303,8 @@ public class Game{
 			break;
 		case 5:
 			if(!myBuildings.getWell()){
-				if(!myBuildings.buildWell(stone, wood)){
+				if(!myBuildings.buildWell(stone, wood))
 					System.out.println("Not enough resources");
-				}
 				else{
 					stone -= 5;
 					wood -= 2;
@@ -333,9 +317,8 @@ public class Game{
 
 		case 6:
 			if(myBuildings.getHouse() && myBuildings.getFence() && myBuildings.getWell()){
-				if(!myBuildings.buildFarm(stone, wood, food)){
+				if(!myBuildings.buildFarm(stone, wood, food))
 					System.out.println("Not enough resources");
-				}
 				else{
 					stone -= 3;
 					wood -= 3;
@@ -348,6 +331,9 @@ public class Game{
 		}
 	}
 
+	/**
+	 * Submits statistics to the Statistics class for storage
+	 */
 	private void updateRecord(){
 		gameStats.setVictory(victory);
 		gameStats.setDays(days);
@@ -482,42 +468,39 @@ public class Game{
 	}
 
 	/**
-	* Adds stone to current amount
-	* @param stoneIn amount of stone to be added
-	*/
+	 * Updates stone quantity
+	 * @param stoneIn the value to adjust stone by
+	 */
 	public void updateStone(int stoneIn){
 		stone = stone + stoneIn;
-		if (stone < 0){
+		if (stone < 0)
 			stone = 0;
-		}
 	}
-
+	
 	/**
-	* Adds wood to current amount
-	* @param woodIn amount of wood to be added
-	*/
+	 * Updates wood quantity
+	 * @param woodIn the value to adjust wood by
+	 */
 	public void updateWood(int woodIn){
 		wood = wood + woodIn;
-		if (wood < 0){
+		if (wood < 0)
 			wood = 0;
-		}
 	}
 
 	/**
-	* Adds food to current amount
-	* @param foodIn amount of food to be added
-	*/
+	 * Updates food quantity
+	 * @param foodIn the value to adjust food by
+	 */
 	public void updateFood(int foodIn){
 		food = food + foodIn;
-		if (food < 0){
+		if (food < 0)
 			food = 0;
-		}
 	}
-
+	
 	/**
-	* Returns the intstance of dice used
-	* @return Dice class with updated values
-	*/
+	 * JUnit testing purposes
+	 * @return	Dice object to access Dice class and test modification of dice
+	 */
 	public Dice getDice(){
 		return dieClass;
 	}
