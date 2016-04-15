@@ -3,7 +3,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /** Tests the Buildings class for different cases.
- * @author Team15
+ * @author Team 15
  * @version April 11, 2016
  * 
  */
