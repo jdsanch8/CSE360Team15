@@ -41,40 +41,37 @@ public class Game{
 	/**
 	 * Acts as the main menu, with various options including play now, view stats, and see help
 	 */
-	public int gameController(){
-		int continuePlaying = 0;
+	public boolean gameController(){
+		boolean continuePlaying = true;
 		System.out.println("---------------------------");
 		System.out.println("Mayor's Town");
 		startScreen();
 		int menuChoice = getMenuChoice();
-		
 		while (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 0){
 			System.out.println("*** Invalid menu choice! Please enter 1, 2, 3, or 0 ***");
 			startScreen();
 			menuChoice = getMenuChoice();
 		}
-		
 		switch(menuChoice){
 		case 1:
-			continuePlaying = 1;
+			continuePlaying = true;
 			startGame();			
 			break;
 		case 2:
 			gameStats.printFile();
-			gameController();
+			continuePlaying = gameController();
 			break;
 		case 3:
 			helpScreen();
-			gameController();
+			continuePlaying = gameController();
 			break;
 		case 0:
+			continuePlaying = false;
 			System.out.println("Exiting game. Goodbye.");
-			continuePlaying = 0;
 			break;
 		default:
 			break;
 		}
-		
 		return continuePlaying;
 	}
 
@@ -97,13 +94,11 @@ public class Game{
 	private static int getMenuChoice()
 	{
 		System.out.print("---> ");
-		
 		while(! in.hasNextInt() )
 		{
 			in.nextLine();
 			System.out.print("---> ");
 		}
-		
 		int menuChoice = in.nextInt();
 		return menuChoice;
 	}
@@ -125,7 +120,6 @@ public class Game{
 		int mult;
 
 		int menuChoice = getMenuChoice();
-		
 		while (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 0){
 			System.out.println("*** Invalid menu choice! Please enter 1, 2, 3, or 0 ***");
 			displayInGameOptions();
@@ -135,23 +129,15 @@ public class Game{
 		switch(menuChoice){
 		case 1:
 			mult = dieClass.rollMultiplier();
-			
-			if(myBuildings.getMill()){
+			if(myBuildings.getMill())
 				dieClass.rollWood(mult, this);
-			}
-			
-			if(myBuildings.getMine()){
+			if(myBuildings.getMine())
 				dieClass.rollStone(mult, this);
-			}
-			
 			dieClass.rollBase(mult, this);
 			setDays(getDays() + 1);
 			updateFood(foodDec);
-			
-			if(getFood() > 0){
+			if(getFood() > 0)
 				inGameOptions();
-			}
-			
 			else{
 				System.out.println("You lose due to a lack of food!");
 				victory = 0;
@@ -160,7 +146,6 @@ public class Game{
 				statisticsList = gameStats.makeArrayList();
 				gameStats.writeListToFile(statisticsList);
 			}
-			
 			break;
 
 		case 2:
@@ -175,9 +160,8 @@ public class Game{
 				statisticsList = gameStats.makeArrayList();
 				gameStats.writeListToFile(statisticsList);
 			}
-			else{
+			else
 				inGameOptions();
-			}
 			break;
 
 		case 3:
@@ -186,9 +170,10 @@ public class Game{
 			break;
 
 		case 0:
+
 			break;
-			
 		default:
+
 			break;
 		}
 	}
@@ -278,9 +263,8 @@ public class Game{
 		switch (choice){
 		case 1:
 			if(!myBuildings.getMine()){
-				if(!myBuildings.buildMine(wood)){
+				if(!myBuildings.buildMine(wood))
 					System.out.println("Not enough resources");
-				}
 				else{
 					wood -= 5;
 					builtBuildings[buildingCount] = "Mine";
@@ -290,9 +274,8 @@ public class Game{
 			break;
 		case 2:
 			if(!myBuildings.getMill()){
-				if(!myBuildings.buildMill(stone)){
+				if(!myBuildings.buildMill(stone))
 					System.out.println("Not enough resources");
-				}
 				else{
 					stone -= 5;
 					builtBuildings[buildingCount] = "Mill";
@@ -302,9 +285,8 @@ public class Game{
 			break;
 		case 3:
 			if(!myBuildings.getHouse()){
-				if(!myBuildings.buildHouse(stone, wood)){
+				if(!myBuildings.buildHouse(stone, wood))
 					System.out.println("Not enough resources");
-				}
 				else{
 					stone -= 5;
 					wood -= 5;
@@ -316,9 +298,8 @@ public class Game{
 			break;
 		case 4:
 			if(!myBuildings.getFence()){
-				if(!myBuildings.buildFence(stone, wood)){
+				if(!myBuildings.buildFence(stone, wood))
 					System.out.println("Not enough resources");
-				}
 				else{
 					stone -= 2;
 					wood -= 5;
@@ -330,9 +311,8 @@ public class Game{
 			break;
 		case 5:
 			if(!myBuildings.getWell()){
-				if(!myBuildings.buildWell(stone, wood)){
+				if(!myBuildings.buildWell(stone, wood))
 					System.out.println("Not enough resources");
-				}
 				else{
 					stone -= 5;
 					wood -= 2;
@@ -345,9 +325,8 @@ public class Game{
 
 		case 6:
 			if(myBuildings.getHouse() && myBuildings.getFence() && myBuildings.getWell()){
-				if(!myBuildings.buildFarm(stone, wood, food)) {
+				if(!myBuildings.buildFarm(stone, wood, food))
 					System.out.println("Not enough resources");
-				}
 				else{
 					stone -= 3;
 					wood -= 3;
@@ -495,23 +474,20 @@ public class Game{
 
 	public void updateStone(int stoneIn){
 		stone = stone + stoneIn;
-		if (stone < 0){
+		if (stone < 0)
 			stone = 0;
-		}
 	}
 
 	public void updateWood(int woodIn){
 		wood = wood + woodIn;
-		if (wood < 0){
+		if (wood < 0)
 			wood = 0;
-		}
 	}
 
 	public void updateFood(int foodIn){
 		food = food + foodIn;
-		if (food < 0){
+		if (food < 0)
 			food = 0;
-		}
 	}
 	
 	public Dice getDice(){
