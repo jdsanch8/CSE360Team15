@@ -45,7 +45,8 @@ If a farm cannot be made by the time your food has run out, you have lost.
 *resources
 *alphabetical order
 The most important statistic used for ranking is victory (i.e., did the player win or lose?).
-If multiple players all won (or lost) the next category looked at for ranking is days.  If
-victory and days are the same, the next category for ranking is buildings made.  If all
+If multiple players all won (or lost) the next category looked at for ranking is days. For a win,
+a higher ranking would complete the game in less days.  For a loss, a higher ranking would survive longer -- 
+i.e., would have more days. If victory and days are the same, the next category for ranking is buildings made.  If all
 three statistics are the same, the next statistic for ranking is resources.  Lastly, if all
 categories are the same, the ranking is sorted alphabetically by the player's name.
