@@ -1,0 +1,15 @@
+To run game:
+
+Look at Week2-3 folder in GitHub. Download Group15Game.zip by clicking on it, and then clicking on raw.
+To run the game:
+
+
+1. Unzip the file
+
+2. Compile all the java files
+
+3. Run GameDriver.java
+
+
+
+Instruction on how to play the game are included on the read-me inside the Week2-3 folder, as well as in the help menu in game.
