@@ -1,5 +1,5 @@
 /** Allows buildings to be constructed given set circumstances, and tracks which buildings are built
- * @author 
+ * @author Team15
  * @version April 11, 2016 * 
  */
 
