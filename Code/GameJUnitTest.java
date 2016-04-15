@@ -5,34 +5,19 @@ import org.junit.Test;
 public class GameJUnitTest {
 
 	@Test
-	public void nameTest() {
+	public void nameTest() { //Ensures name is read in properly
 		Game driver = new Game("Team15");
-		assertEquals("Team15", driver.getName());
+		assertEquals("Team15", driver.getName());	
 	}
 	
 	@Test
-	public void diceRoller(){		
-		Dice roller = new Dice();
-		int testNum = roller.rollMultiplier();
-		assertTrue(testNum >= 1 && testNum <= 6);
-	}
-	
-	@Test
-	public void diceRollerBigger(){
-		Dice roller = new Dice();
-		roller.upGradeMulti();
-		int testNum = roller.rollMultiplier();
-		assertTrue(testNum >= 1 && testNum <= 8);
-	}
-	
-	@Test
-	public void startDay(){
+	public void startDay(){ //Ensures days start at 0
 		Game driver = new Game("Team15");
 		assertEquals(0, driver.getDays());
 	}
 	
 	@Test
-	public void testBuildMine(){
+	public void testBuildMine(){ //Ensures mine takes resources and is built correctly
 		Game driver = new Game("Team15");
 		driver.setStone(15);
 		driver.setWood(15);
@@ -41,7 +26,7 @@ public class GameJUnitTest {
 	}
 	
 	@Test
-	public void testBuildMill(){
+	public void testBuildMill(){ //Ensures mill takes resources and is built correctly
 		Game driver = new Game("Team15");
 		driver.setStone(15);
 		driver.setWood(15);
@@ -50,7 +35,7 @@ public class GameJUnitTest {
 	}
 	
 	@Test
-	public void testBuildHouse(){
+	public void testBuildHouse(){ //Ensures House takes resources and is built correctly
 		Game driver = new Game("Team15");
 		driver.setStone(15);
 		driver.setWood(15);
@@ -59,7 +44,7 @@ public class GameJUnitTest {
 	}
 	
 	@Test
-	public void testBuildFence(){
+	public void testBuildFence(){ //Ensures Fence takes resources and is built correctly
 		Game driver = new Game("Team15");
 		driver.setStone(15);
 		driver.setWood(15);
@@ -68,32 +53,11 @@ public class GameJUnitTest {
 	}
 	
 	@Test
-	public void testBuildWell(){
+	public void testBuildWell(){ //Ensures well takes resources and is built correctly
 		Game driver = new Game("Team15");
 		driver.setStone(15);
 		driver.setWood(15);
 		driver.build(5);
 		assertTrue(driver.getStone() == 10 && driver.getWood() == 13);
 	}
-	
-	@Test
-	public void testFenceDice(){
-		Game driver = new Game("Team15");
-		driver.setStone(15);
-		driver.setWood(15);
-		driver.build(4);
-		Dice tempDie = driver.getDice();
-		assertTrue(tempDie.getFence()); 
-	}
-	
-	@Test
-	public void testHouseDice(){
-		Game driver = new Game("Team15");
-		driver.setStone(15);
-		driver.setWood(15);
-		driver.build(3);
-		Dice tempDie = driver.getDice();
-		assertTrue(tempDie.getHouse()); 
-	}
-
 }
