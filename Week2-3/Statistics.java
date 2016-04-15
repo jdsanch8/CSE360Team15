@@ -12,7 +12,7 @@ import java.util.Collections;
  * with more buildings will be ranked higher).  The least weighted statistic is resources (if all other statistics are the same, resources
  * are looked at).  Lastly, if all statistics are the same, the listing is done in alphabetical order.
  * 
- * @author Gregory Benjamin 
+ * @author Group15 
  * @version April 13, v.3
  */
 
