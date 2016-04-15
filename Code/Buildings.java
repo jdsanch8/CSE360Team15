@@ -1,8 +1,8 @@
 /** Allows buildings to be constructed given set circumstances, and tracks which buildings are built
  * @author 
- * @version April 11, 2016
- * 
+ * @version April 11, 2016 * 
  */
+
 public class Buildings {
 	
 	private boolean house;
@@ -42,8 +42,9 @@ public class Buildings {
 	public boolean buildHouse(int stone, int wood){
 		
 		// Checks if it is already built
+		boolean built;
 		if(houseBuilt){
-			return false;
+			built = false;
 		}
 		else{
 			// Checks if the necessary resources are available for construction
@@ -51,8 +52,9 @@ public class Buildings {
 				house = true;
 				houseBuilt = true;
 			}
-		return house;
+		built = house;
 		}
+		return built;
 	}
 
 	/** Sets fence variable to true if the requirements are met
@@ -62,8 +64,9 @@ public class Buildings {
 	public boolean buildFence(int stone, int wood){
 		
 		// Checks if it is already built
+		boolean built;
 		if(fenceBuilt){
-			return false;
+			built = false;
 		}
 		else{
 		
@@ -72,8 +75,9 @@ public class Buildings {
 				fence = true;
 				fenceBuilt = true;
 			}
-		return fence;
+		built = fence;
 		}
+		return built;
 	}
 	
 	/** Sets well variable to true if the requirements are met
@@ -83,8 +87,9 @@ public class Buildings {
 	public boolean buildWell(int stone, int wood){
 		
 		// Checks if it is already built
+		boolean built;
 		if(wellBuilt){
-			return false;
+			built = false;
 		}
 		else{
 			// Checks if the necessary resources are available for construction
@@ -92,8 +97,9 @@ public class Buildings {
 				well = true;
 				wellBuilt = true;
 			}
-		return well;
+		built = well;
 		}
+		return built;
 	}
 	
 	/** Sets mill variable to true if the requirements are met
@@ -103,8 +109,9 @@ public class Buildings {
 	public boolean buildMill(int stone){
 		
 		// Checks if it is already built
+		boolean built;
 		if(millBuilt){
-			return false;
+			built = false;
 		}
 		else{
 			// Checks if the necessary resources are available for construction
@@ -112,8 +119,9 @@ public class Buildings {
 				mill = true;
 				millBuilt = true;
 			}
-		return mill;
+		built = mill;
 		}		
+		return built;
 	}
 	
 	/** Sets mine variable to true if the requirements are met
@@ -123,8 +131,9 @@ public class Buildings {
 	public boolean buildMine(int wood){
 		
 		// Checks if it is already built
+		boolean built;
 		if(mineBuilt){
-			return false;
+			built = false;
 		}
 		else{
 			// Checks if the necessary resources are available for construction
@@ -132,8 +141,9 @@ public class Buildings {
 				mine = true;
 				mineBuilt = true;
 			}
-		return mine;
+		built = mine;
 		}
+		return built;
 	}
 	
 	/** Sets farm variable to true if the requirements are met
