@@ -5,10 +5,11 @@ import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 
@@ -46,41 +47,31 @@ public class SwingWindowStats {
 	private void initialize() {
 		
 		Statistics statGUI = new Statistics("NULL");
-		/*
-		JFrame frame0 = new JFrame("Main Menu");
-		frame0.setBounds(100, 100, 600, 500);
-		frame0.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		
-		JPanel panel0 = new JPanel();
-		frame0.getContentPane().add(panel0, BorderLayout.NORTH);
 		
-		JButton btnNewButton0 = new JButton("View Statistics");
-		panel0.add(btnNewButton0);
-		
-		btnNewButton0.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e)
-			{
-				
-			}
-		});
-		
-		*/
 		frame1 = new JFrame("Player Statistics");
 		frame1.setBounds(100, 100, 600, 500);
 		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JPanel panel_2 = new JPanel();
+		frame1.getContentPane().add(panel_2, BorderLayout.SOUTH);
+		
+		JButton btnNewButton = new JButton("Go Back to Main Menu");
+		panel_2.add(btnNewButton);
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		
 		JPanel panel = new JPanel();
 		frame1.getContentPane().add(panel, BorderLayout.NORTH);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JPanel panel_1 = new JPanel();
-		panel.add(panel_1);
+		JLabel lblNewLabel = new JLabel("      Player Name                       Victory   Days   Buildings   Resources       ");
+		panel.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("Go Back to Main Menu");
-		panel_1.add(btnNewButton);
-		
-		JLabel lblNewJgoodiesLabel = DefaultComponentFactory.getInstance().createLabel("  Player Name                           Victory   Days   Buildings   Resources       ");
-		panel.add(lblNewJgoodiesLabel);
 
 		JScrollPane scrollPane = new JScrollPane();
 		frame1.getContentPane().add(scrollPane, BorderLayout.CENTER);
@@ -92,6 +83,8 @@ public class SwingWindowStats {
 		//textArea.setTabSize(2);
 		statGUI.viewStatsInGUI(textArea);
 		scrollPane.setViewportView(textArea);
+		
+	
 		
 	}
 
