@@ -56,15 +56,6 @@ public class DiceGame15 extends Application {
 			frame.setVisible(true);
 		});
 
-		newGame_btn.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-			@Override
-			public void handle(KeyEvent e) {
-				if (e.getCode() == KeyCode.ENTER) {
-					PlayGame.playGame();
-				}
-			}
-		});
 
 		//============================================================= viewRankings_btn
 		Button viewRankings_btn = new Button("View Rankings");
