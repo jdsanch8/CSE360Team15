@@ -1,4 +1,4 @@
-
+//package gui;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -40,160 +40,6 @@ public class Game{
 		foodDec = -3;
 	}
 
-	/**
-	 * Acts as the main menu, with various options including play now, view stats, and see help
-	 */
-	public int gameController(){
-		int continuePlaying = 0;
-		System.out.println("---------------------------");
-		System.out.println("Mayor's Town");
-		startScreen();
-		int menuChoice = getMenuChoice();
-
-		while (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 0){
-			System.out.println("*** Invalid menu choice! Please enter 1, 2, 3, or 0 ***");
-			startScreen();
-			menuChoice = getMenuChoice();
-		}
-
-		switch(menuChoice){
-		case 1:
-			continuePlaying = 1;
-			startGame();
-			break;
-		case 2:
-			gameStats.printFile();
-			gameController();
-			break;
-		case 3:
-		//	helpScreen();
-			gameController();
-			break;
-		case 0:
-			System.out.println("Exiting game. Goodbye.");
-			continuePlaying = 0;
-			break;
-		default:
-			break;
-		}
-
-		return continuePlaying;
-	}
-
-	/**
-	 * Prints out menu explaining options
-	 */
-	private void startScreen(){
-		System.out.println("----------------------------");
-		System.out.println("Hello, " + getName() + ", please select an option(Enter digit):");
-		System.out.println("1) Start Game");
-		System.out.println("2) View Stats");
-		System.out.println("3) Help");
-		System.out.println("0) Exit Game");
-	}
-
-	/**
-	 * Reads in input until a valid response is received
-	 * @return integer containing user choice
-	 */
-	private static int getMenuChoice()
-	{
-		System.out.print("---> ");
-
-		while(! in.hasNextInt() )
-		{
-			in.nextLine();
-			System.out.print("---> ");
-		}
-
-		int menuChoice = in.nextInt();
-		return menuChoice;
-	}
-
-	/**
-	 * Calls methods that begin the game
-	 */
-	private void startGame(){
-		setupEnvironment();
-		inGameOptions();
-	}
-
-	/**
-	 * Contains a list of choices the player can make during the course of the game
-	 */
-	private void inGameOptions(){
-		displayCurrentGameStats();
-		displayInGameOptions();
-		int mult;
-
-		int menuChoice = getMenuChoice();
-
-		while (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 0){
-			System.out.println("*** Invalid menu choice! Please enter 1, 2, 3, or 0 ***");
-			displayInGameOptions();
-			menuChoice = getMenuChoice();
-		}
-
-		switch(menuChoice){
-		case 1:
-			mult = dieClass.rollMultiplier();
-
-			if(myBuildings.getMill()){
-				dieClass.rollWood(mult, this);
-			}
-
-			if(myBuildings.getMine()){
-				dieClass.rollStone(mult, this);
-			}
-
-			dieClass.rollBase(mult, this);
-			setDays(getDays() + 1);
-			updateFood(foodDec);
-
-			if(getFood() > 0){
-				inGameOptions();
-			}
-
-			else{
-				System.out.println("You lose due to a lack of food!");
-				victory = 0;
-				updateRecord();
-				gameStats.writeToFile();
-				statisticsList = gameStats.makeArrayList();
-				gameStats.writeListToFile(statisticsList);
-			}
-
-			break;
-
-		case 2:
-		//	printBuildings();
-			int choice = getMenuChoice();
-		//	build(choice);
-			if(myBuildings.getFarm()){
-				System.out.println("You win!");
-				victory = 1;
-				updateRecord();
-				gameStats.writeToFile();
-				statisticsList = gameStats.makeArrayList();
-				gameStats.writeListToFile(statisticsList);
-			}
-			else{
-				inGameOptions();
-			}
-			break;
-
-		case 3:
-			displayInGameHelp();
-			inGameOptions();
-			break;
-
-		case 0:
-			break;
-
-		default:
-			break;
-		}
-	}
 
 	public int rollMult(){
 		return dieClass.rollMultiplier();
@@ -224,53 +70,6 @@ public class Game{
 	}
 
 
-	public void rollDice(){
-		int mult = dieClass.rollMultiplier();
-
-		if(myBuildings.getMill()){
-			dieClass.rollWood(mult, this);
-		}
-
-		if(myBuildings.getMine()){
-			dieClass.rollStone(mult, this);
-		}
-
-		dieClass.rollBase(mult, this);
-		setDays(getDays() + 1);
-		updateFood(foodDec);
-	}
-
-	/**
-	 * Prints the menu for the player containing their options
-	 */
-	private void displayInGameOptions(){
-		System.out.println("----------------------------");
-		System.out.println("1) Let's Rock & Roll");
-		System.out.println("2) Build");
-		System.out.println("3) Help");
-		System.out.println("0) Quit Current Game");
-	}
-
-	/**
-	 * Allows the player to choose their inital starting conditions, granting them a boon
-	 */
-	private void setupEnvironment(){
-		System.out.println("Select your environment.\nForest will provide you with 5 wood to start and Mountains will provide you with 5 stone to start.\nWhat will it be?(1 = Forest, 2 = Mountains)");
-		int menuChoice = getMenuChoice();
-		while (menuChoice != 1 && menuChoice != 2){
-			System.out.println("*** Invalid menu choice! Please enter 1 or 2 ***");
-			menuChoice = getMenuChoice();
-		}
-		if (menuChoice == 1){
-			setWood(5);
-			setEnvironment(1);
-		}
-		else{
-			setStone(5);
-			setEnvironment(2);
-		}
-	}
-
 	/**
 	 * Provides an explanation on how to play the game
 
@@ -284,65 +83,39 @@ public class Game{
 				+ "event that your roll yields a disaster and a house will increase your acquired resources in the event that your roll\n"
 				+ "yields food, wood or stone. Let's get building!");
 	}
- */
-	/**
-	 * New Line
-	 */
-	private void displayInGameHelp(){
-		System.out.println("");
-	}
 
-	/**
-	 * Prints a list of unbuilt buildings, and the cost to build them
 
-	private void printBuildings(){
-		if(!myBuildings.getMine()){
-			System.out.println("1. Mine. Cost: 5 Wood, 0 Stone");
-		}
-		if(!myBuildings.getMill()){
-			System.out.println("2. Mill. Cost: 0 Wood, 5 Stone");
-		}
-		if(!myBuildings.getHouse()){
-			System.out.println("3. House. Cost: 5 Wood, 5 Stone");
-
-		}
-		if(!myBuildings.getFence()){
-			System.out.println("4. Fence. Cost: 5 Wood, 2 Stone");
-		}
-		if(!myBuildings.getWell()){
-			System.out.println("5. Well. Cost: 2 Wood, 5 Stone");
-		}
-		if(myBuildings.getHouse() && myBuildings.getFence() && myBuildings.getWell()){
-			System.out.println("6. Farm. Cost: 3 Wood, 3 Stone, 3 Food");
-		}
-	}*/
 
 	/**
 	 * Builds a building depending on the users choice
 	 * @param choice number corresponding with the building they want, given to them by print buildings
 	 */
 
-	public void buildMine(){
+	public boolean buildMine(){
 		if(!myBuildings.getMine()){
 			if(myBuildings.buildMine(wood))	{
 				wood -= 5;
 				builtBuildings[buildingCount] = "Mine";
 				buildingCount++;
+				return true;
 			}
 		}
+		return false;
 	}
 
-	public void buildMill(){
+	public boolean buildMill(){
 		if(!myBuildings.getMill()){
 			if(myBuildings.buildMill(stone)){
 				stone -= 5;
 				builtBuildings[buildingCount] = "Mill";
 				buildingCount++;
+				return true;
 			}
 		}
+		return false;
 	}
 
-	public void buildHouse(){
+	public boolean buildHouse(){
 		if(!myBuildings.getHouse()){
 			if(myBuildings.buildHouse(stone, wood)){
 				stone -= 5;
@@ -350,11 +123,13 @@ public class Game{
 				dieClass.upGradeMulti();
 				builtBuildings[buildingCount] = "House";
 				buildingCount++;
+				return true;
 			}
 		}
+		return false;
 	}
 
-	public void buildFence(){
+	public boolean buildFence(){
 		if(!myBuildings.getFence()){
 			if(myBuildings.buildFence(stone, wood)){
 				stone -= 2;
@@ -362,11 +137,13 @@ public class Game{
 				dieClass.deGradeDespairMulti();
 				builtBuildings[buildingCount] = "Fence";
 				buildingCount++;
+				return true;
 			}
 		}
+		return false;
 	}
 
-	public void buildWell(){
+	public boolean buildWell(){
 		if(!myBuildings.getWell()){
 			if(myBuildings.buildWell(stone, wood)){
 				stone -= 5;
@@ -374,11 +151,13 @@ public class Game{
 				builtBuildings[buildingCount] = "Well";
 				buildingCount++;
 				foodDec = -2;
+				return true;
 			}
 		}
+		return false;
 	}
 
-	public void buildFarm(){
+	public boolean buildFarm(){
 		if(myBuildings.getHouse() && myBuildings.getFence() && myBuildings.getWell()){
 			if(myBuildings.buildFarm(stone, wood, food)) {
 				stone -= 3;
@@ -386,8 +165,15 @@ public class Game{
 				food -= 3;
 				builtBuildings[buildingCount] = "Farm";
 				buildingCount++;
+				victory = 1;
+				updateRecord();
+				gameStats.writeToFile();
+				statisticsList = gameStats.makeArrayList();
+				gameStats.writeListToFile(statisticsList);
+				return true;
 			}
 		}
+		return false;
 	}
 
 	private void updateRecord(){
@@ -395,20 +181,6 @@ public class Game{
 		gameStats.setDays(days);
 		gameStats.setBuildings(buildingCount);
 		gameStats.setResources(wood + stone + food);
-	}
-
-	/**
-	 * Displays their current resources, days, and buildings
-	 */
-	private void displayCurrentGameStats(){
-		System.out.println("Name: " + playerName);
-		System.out.println("Days: " + days);
-		System.out.println("Food: " + food + "\t Wood: " + wood + "\t Stone: " + stone);
-		System.out.println("Built Buildings:");
-		for (int loop = 0; loop < buildingCount; loop++){
-			System.out.println(builtBuildings[loop]);
-		}
-		System.out.println();
 	}
 
 	/**

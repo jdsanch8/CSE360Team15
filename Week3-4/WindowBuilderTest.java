@@ -1,3 +1,5 @@
+//package gui;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -57,6 +59,11 @@ import javax.swing.JComboBox;
 
 	public WindowBuilderTest(String name) {
 		Game engine = new Game(name);
+		boolean loc = UserConfirm.locConfirm("Pick your starting location: Forest gives wood; Mountains gives stone.");
+		if(loc)
+			engine.setWood(5);
+		else
+			engine.setStone(5);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 552, 428);
 		contentPane = new JPanel();
@@ -82,10 +89,12 @@ import javax.swing.JComboBox;
 		});
 
 		JButton btnBuildHouse = new JButton("Build House");
+		btnBuildHouse.setToolTipText("Wood: 5\tStone: 5");
 		btnBuildHouse.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				engine.buildHouse();
+				if(!engine.buildHouse())
+					txtTmp.setText("Not Enough Resources!");
 				txtFood.setText("Food: " + engine.getFood());
 				txtStone.setText("Stone: " + engine.getStone()) ;
 				txtWood.setText("Wood: " + engine.getWood());
@@ -94,10 +103,12 @@ import javax.swing.JComboBox;
 		});
 
 		JButton btnBuildFence = new JButton("Build Fence");
+		btnBuildFence.setToolTipText("Wood: 5\tStone: 2");
 		btnBuildFence.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				engine.buildFence();
+				if(!engine.buildFence())
+					txtTmp.setText("Not Enough Resources!");;
 				txtFood.setText("Food: " + engine.getFood());
 				txtStone.setText("Stone: " + engine.getStone()) ;
 				txtWood.setText("Wood: " + engine.getWood());
@@ -106,10 +117,12 @@ import javax.swing.JComboBox;
 		});
 
 		JButton btnBuildFarm = new JButton("Build Farm");
+		btnBuildFarm.setToolTipText("Food: 3\tWood: 3\tStone: 3");
 		btnBuildFarm.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				engine.buildFarm();
+				if(!engine.buildFarm())
+					txtTmp.setText("Not Enough Resources!");;
 				txtFood.setText("Food: " + engine.getFood());
 				txtStone.setText("Stone: " + engine.getStone()) ;
 				txtWood.setText("Wood: " + engine.getWood());
@@ -118,10 +131,12 @@ import javax.swing.JComboBox;
 		});
 
 		JButton btnNewButton_1 = new JButton("Build Well");
+		btnNewButton_1.setToolTipText("Wood: 2\tStone: 5");
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				engine.buildWell();
+				if(!engine.buildWell())
+					txtTmp.setText("Not Enough Resources!");
 				txtFood.setText("Food: " + engine.getFood());
 				txtStone.setText("Stone: " + engine.getStone()) ;
 				txtWood.setText("Wood: " + engine.getWood());
@@ -130,10 +145,12 @@ import javax.swing.JComboBox;
 		});
 
 		JButton btnBuildMine = new JButton("Build Mine");
+		btnBuildMine.setToolTipText("Wood: 5");
 		btnBuildMine.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				engine.buildMine();
+				if(!engine.buildMine())
+					txtTmp.setText("Not Enough Resources!");
 				txtFood.setText("Food: " + engine.getFood());
 				txtStone.setText("Stone: " + engine.getStone()) ;
 				txtWood.setText("Wood: " + engine.getWood());
@@ -142,10 +159,12 @@ import javax.swing.JComboBox;
 		});
 
 		JButton btnBuildMill = new JButton("Build Mill");
+		btnBuildMill.setToolTipText("Stone: 5");
 		btnBuildMill.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				engine.buildMill();
+				if(!engine.buildMill())
+					txtTmp.setText("Not Enough Resources!");
 				txtFood.setText("Food: " + engine.getFood());
 				txtStone.setText("Stone: " + engine.getStone()) ;
 				txtWood.setText("Wood: " + engine.getWood());
