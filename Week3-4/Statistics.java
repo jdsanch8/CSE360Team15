@@ -6,23 +6,23 @@ import javax.swing.JTextArea;
 
 
 /**
- * Class Statistics collects player name, statistic of a win or loss by player, days survived by player, buildings made by player, and 
+ * Class Statistics collects player name, statistic of a win or loss by player, days survived by player, buildings made by player, and
  * resources made by player.  The class creates or appends a data file of these statistics in the folder of the java project.  More specifically,
  * the class writes to the data text file with a specific order of sorting.  That is, a victory has the highest weight for sorting (a 1 always
- * scores higher than a 0).  The next highest weight for sorting is for days. For example, if multiple players have victory = 1, the player who completes 
- * the game the quickest will have a higher rank (i.e., smallest day value).  Conversely, if multiple players have losses (victory = 0), then the player 
+ * scores higher than a 0).  The next highest weight for sorting is for days. For example, if multiple players have victory = 1, the player who completes
+ * the game the quickest will have a higher rank (i.e., smallest day value).  Conversely, if multiple players have losses (victory = 0), then the player
  * that survives the longest will have a higher rank (i.e., the largest day value).  The next highest weight for sorting is for buildings made (if victory and days are the same, the player
  * with more buildings will be ranked higher).  The least weighted statistic is resources (if all other statistics are the same, resources
  * are looked at).  Lastly, if all statistics are the same, the listing is done in alphabetical order.
- * 
- * @author Gregory Benjamin 
+ *
+ * @author Gregory Benjamin
  * @version April 13, v.3
  */
 
 public class Statistics {
 
 	private String playerName;
-	private int victory;	
+	private int victory;
 	private int days;
 	private int buildings;
 	private int resources;
@@ -32,7 +32,7 @@ public class Statistics {
 
 	/**
 	 * Statistics constructor sets player name, victory (will become 1 for win, 0 for lose), days survived, buildings built, and resources collected
-	 * during gameplay. 
+	 * during gameplay.
 	 * @param playerName is player's name, inputed by player
 	 * @throws IOException if file doesn't exist and is unable to be created
 	 */
@@ -54,15 +54,15 @@ public class Statistics {
 		}
 	}
 
-	
+
 	public void viewStatsInGUI(JTextArea text)
 	{
 		String token []; // holds parsed statistics obtained from line of txt file
-		String player; 
-		String win; 
+		String player;
+		String win;
 		int winInt;
-		String time; 
-		String properties; 
+		String time;
+		String properties;
 		String supplies;
 		String line = null; //holds line of txt file
 		String toGUI;
@@ -76,7 +76,7 @@ public class Statistics {
 
 			while((line = bufferedReader.readLine()) != null) {
 				token = line.split("~");
-				
+
 				player = String.format("%-25s",token[0]);
 				winInt =Integer.parseInt( token[1]);
 				if(winInt == 1){
@@ -92,20 +92,20 @@ public class Statistics {
 				rankingStr = rankingStr.concat(".");
 				rankingStr = String.format("%-5s",rankingStr);
 				toGUI = player + win + time + properties + supplies;
-				
+
 				text.append(rankingStr + toGUI +"\n");
 				ranking++;
-			}   
-			bufferedReader.close();         
+			}
+			bufferedReader.close();
 		}
-		catch(FileNotFoundException ex) { 
-			System.out.println("Unable to open file '" +  file.getName() + "'.");                
+		catch(FileNotFoundException ex) {
+			System.out.println("Unable to open file '" +  file.getName() + "'.");
 		}
 		catch(IOException ex) {
-			System.out.println("Error reading file '"  + file.getName() + "'.");                  
+			System.out.println("Error reading file '"  + file.getName() + "'.");
 		}
 	}
-	
+
 	/**
 	 * printFile() gets file and reads it line by line and prints line by line
 	 * @throws FileNotFoundException if file is unable to open
@@ -123,14 +123,14 @@ public class Statistics {
 
 			while((line = bufferedReader.readLine()) != null) {
 				System.out.println(line);
-			}   
-			bufferedReader.close();         
+			}
+			bufferedReader.close();
 		}
-		catch(FileNotFoundException ex) { 
-			System.out.println("Unable to open file '" +  file.getName() + "'.");                
+		catch(FileNotFoundException ex) {
+			System.out.println("Unable to open file '" +  file.getName() + "'.");
 		}
 		catch(IOException ex) {
-			System.out.println("Error reading file '"  + file.getName() + "'.");                  
+			System.out.println("Error reading file '"  + file.getName() + "'.");
 		}
 	}
 
@@ -187,12 +187,12 @@ public class Statistics {
 		return resources;
 	}
 	//end methods solely for unit testing (in real scenario, these stats will be obtained from reading file, not get() methods)
-	
+
 	/**
 	 * writeListToFile writes (appends, if file already has content) newly collected statistics from game play.
 	 * @exception IOException if unable to write to file
 	 */
-	 
+
 	public void writeToFile(){
 
 		try {
@@ -218,20 +218,20 @@ public class Statistics {
 
 	/**
 	 * makeArrayList reads in file line by line and parses out each statistic.  The parsed statistics from a single line of the text file
-	 * are placed in one element of an arrayList.  The sorting of the arrayList is done by weighting described in Statistics class description.  
+	 * are placed in one element of an arrayList.  The sorting of the arrayList is done by weighting described in Statistics class description.
 	 * @return ArrayList of sorted Stats Class objects.
 	 * @exception FileNotFoundException if file is not found
 	 * @exception IOException if there is error reading file
 	 */
 
 	public ArrayList<Stats> makeArrayList(){
-		
+
 		ArrayList<Stats> list = new ArrayList<Stats>();
 		String token []; // holds parsed statistics obtained from line of txt file
-		String player; 
-		int win; 
-		int time; 
-		int properties; 
+		String player;
+		int win;
+		int time;
+		int properties;
 		int supplies;
 		String line = null; //holds line of txt file
 
@@ -249,16 +249,16 @@ public class Statistics {
 				properties = Integer.parseInt(token[3]);
 				supplies = Integer.parseInt(token[4]);
 				list.add(new Stats(player, win,time, properties, supplies));
-			}   
-			bufferedReader.close();   
+			}
+			bufferedReader.close();
 			Collections.sort(list); //sort list using overrided CompareTo method
 		}
-		catch(FileNotFoundException ex) { 
-			System.out.println("Unable to open file '" +  file.getName() + "'.");                
+		catch(FileNotFoundException ex) {
+			System.out.println("Unable to open file '" +  file.getName() + "'.");
 		}
 		catch(IOException ex) {
-			System.out.println("Error reading file '"  + file.getName() + "'.");                  
-		}   
+			System.out.println("Error reading file '"  + file.getName() + "'.");
+		}
 		return list;
 	}
 
@@ -273,7 +273,7 @@ public class Statistics {
 		try {
 			FileWriter fileWriter = new FileWriter(file.getAbsoluteFile(), false); //append is false
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-			
+
 			for(Stats stat: arrayList){
 				bufferedWriter.write(stat.getPlayer());
 				bufferedWriter.write("~");
@@ -285,7 +285,7 @@ public class Statistics {
 				bufferedWriter.write("~");
 				bufferedWriter.write(Integer.toString(stat.getSupplies()));
 				bufferedWriter.newLine();
-			}          
+			}
 			bufferedWriter.close();
 		}
 		catch(IOException ex) {
@@ -297,7 +297,7 @@ public class Statistics {
 /**
  * Class Stats is similar to the Statistics class.  The difference is the Stats class is designed for ArrayList use only.
  * ArrayList is of type Stats for ease of sorting: this class implements Comparable.
- * @author Gregory Benjamin 
+ * @author Gregory Benjamin
  * @version April 10 v.4
  */
 
@@ -307,18 +307,18 @@ class Stats implements Comparable<Stats>{
 	private int win;
 	private int time;
 	private int properties;
-	private int supplies; 
+	private int supplies;
 
 	/**
 	 * Stats constructor sets player name, win (will become 1 for win, 0 for lose), time survived, properties built, and supplies collected
-	 * during gameplay. 
+	 * during gameplay.
 	 * @param playerName is player's name
 	 * @param win is integer 1 for win and 0 for loss
 	 * @param time is integer for days survived
 	 * @param properties is integer for buildings built
 	 * @param supplies is integer for resources collected
 	 */
-	
+
 	Stats(String player,int win, int time, int properties, int supplies){
 		this.player = player;
 		this.win = win;
@@ -326,60 +326,60 @@ class Stats implements Comparable<Stats>{
 		this.properties = properties;
 		this.supplies = supplies;
 	}
-	
+
 	/**
 	 * getPlayer obtains player name
 	 * @return player String of player's name
 	 */
-	
+
 	public String getPlayer(){
 		return this.player;
 	}
-	
+
 	/**
 	 * getWin obtains if player won or lost
 	 * @return win integer that is 1 for win, 0 for loss
 	 */
-	
+
 	public int getWin(){
 		return this.win;
 	}
-	
+
 	/**
 	 * getTime obtains duration of time that player survived game
 	 * @return time integer that is time of survival
 	 */
-	
+
 	public int getTime(){
 		return this.time;
 	}
-	
+
 	/**
 	 * getProperties obtains number of buildings that player made
 	 * @return properties integer number of buildings built
 	 */
-	
+
 	public int getProperties(){
 		return this.properties;
 	}
-	
+
 	/**
 	 * getSupplies obtains number of resources that player accumulated
-	 * @return supplies integer number of resources accumulated by player 
+	 * @return supplies integer number of resources accumulated by player
 	 */
-	
+
 	public int getSupplies(){
 		return this.supplies;
 	}
 
 	/**
 	 * compareTo overrides compareTo function for use that is specific to this program's requirements:
-	 * A victory has the highest weight for sorting (a 1 always scores higher than a 0).  
-	 * The next highest weight for sorting is for days. For example, if multiple players have victory = 1, the player who completes 
-	 * the game the quickest will have a higher rank (i.e., smallest day value).  Conversely, if multiple players have losses (victory = 0), then the player 
-	 * that survives the longest will have a higher rank (i.e., the largest day value).  The next highest weight for sorting is for buildings made 
-	 * (if victory and days are the same, the player with more buildings will be ranked higher).  The least weighted statistic is resources 
-	 * (if all other statistics are the same, resources are looked at).  Lastly, if all statistics are the same, the listing is done in alphabetical order.  
+	 * A victory has the highest weight for sorting (a 1 always scores higher than a 0).
+	 * The next highest weight for sorting is for days. For example, if multiple players have victory = 1, the player who completes
+	 * the game the quickest will have a higher rank (i.e., smallest day value).  Conversely, if multiple players have losses (victory = 0), then the player
+	 * that survives the longest will have a higher rank (i.e., the largest day value).  The next highest weight for sorting is for buildings made
+	 * (if victory and days are the same, the player with more buildings will be ranked higher).  The least weighted statistic is resources
+	 * (if all other statistics are the same, resources are looked at).  Lastly, if all statistics are the same, the listing is done in alphabetical order.
 	 * @param compareStat of type Stats is being compared to the instance of Stats class that is associated with the compareTo method.
 	 */
 
@@ -417,7 +417,7 @@ class Stats implements Comparable<Stats>{
 						String playerString = compareStat.getPlayer();
 						return (1 - playerString.compareTo(this.player));
 					}
-				}	
+				}
 			}
 		}
 	}
@@ -427,5 +427,5 @@ class Stats implements Comparable<Stats>{
 	public String toString(){
 		return "name=" + this.player + ", win=" + this.win + ", time=" + this.time + ", properties=" + this.properties
 				+ ", supplies=" + this.supplies;
-	} 
+	}
 }

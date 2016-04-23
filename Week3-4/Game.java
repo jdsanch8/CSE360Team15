@@ -195,6 +195,35 @@ public class Game{
 		}
 	}
 
+	public int rollMult(){
+		return dieClass.rollMultiplier();
+	}
+
+	public String rollMill(int mult){
+		String out = "";
+		if(myBuildings.getMill()){
+			out = dieClass.rollWood(mult, this);
+		}
+		return out;
+	}
+
+	public String rollMine(int mult){
+		String out = "";
+		if(myBuildings.getMine()){
+			out = dieClass.rollStone(mult, this);
+		}
+		return out;
+	}
+
+	public String rollEvent(int mult){
+		String out = "";
+		out = dieClass.rollBase(mult, this);
+		setDays(getDays() + 1);
+		updateFood(foodDec);
+		return out;
+	}
+
+
 	public void rollDice(){
 		int mult = dieClass.rollMultiplier();
 

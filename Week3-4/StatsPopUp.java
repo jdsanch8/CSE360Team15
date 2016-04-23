@@ -8,37 +8,29 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
 @SuppressWarnings("serial")
 public class StatsPopUp extends JDialog {
 
-	
+
 	private final JPanel contentPanel = new JPanel();
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			StatsPopUp dialog = new StatsPopUp();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	 * Launch the application.	 */
+
 
 	/**
 	 * Create the dialog.
 	 */
 	public StatsPopUp() {
-		
+
 		Statistics statGUI = new Statistics("NULL");
-		
-		
+
+
 		setBounds(100, 100, 600, 500);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -58,8 +50,8 @@ public class StatsPopUp extends JDialog {
 		{
 			JPanel panel = new JPanel();
 			contentPanel.add(panel, BorderLayout.NORTH);
-			
-			JLabel lblNewLabel = new JLabel("      Player Name                       Victory   Days   Buildings   Resources       ");
+
+			JLabel lblNewLabel = new JLabel("      Player Name                                 Victory   Days   Buildings   Resources       ");
 			GroupLayout gl_panel = new GroupLayout(panel);
 			gl_panel.setHorizontalGroup(
 				gl_panel.createParallelGroup(Alignment.LEADING)
@@ -82,7 +74,12 @@ public class StatsPopUp extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
+				okButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+				   dispose();
+				}
+			});
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
