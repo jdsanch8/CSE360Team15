@@ -1,2 +1,4 @@
-Currently Works, though it doesn't prompt user for inital enviroment, and it looks ugly as fuck. Also don't give user any clear indication
-of which buildings have been built, or their cost.
+Current Worklog:
+
+Make it not look ugly.
+Show current built buildings.
