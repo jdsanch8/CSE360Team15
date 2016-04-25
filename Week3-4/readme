@@ -1,4 +1,5 @@
 Current Worklog:
 
 Make it not look ugly.
-Show current built buildings.
+*Currently built buildings are simply removed as an option, we will have to decide if we want them to be able to see what
+they have built already*
