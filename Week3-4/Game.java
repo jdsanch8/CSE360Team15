@@ -157,6 +157,13 @@ public class Game{
 		return false;
 	}
 
+	public void endGame(){
+		updateRecord();
+		gameStats.writeToFile();
+		statisticsList = gameStats.makeArrayList();
+		gameStats.writeListToFile(statisticsList);
+	}
+
 	public boolean buildFarm(){
 		if(myBuildings.getHouse() && myBuildings.getFence() && myBuildings.getWell()){
 			if(myBuildings.buildFarm(stone, wood, food)) {

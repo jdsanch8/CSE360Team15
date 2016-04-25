@@ -89,6 +89,13 @@ import javax.swing.JOptionPane;
 				txtStone.setText("Stone: " + engine.getStone()) ;
 				txtWood.setText("Wood: " + engine.getWood());
 				txtDays.setText("Days: " + engine.getDays());
+
+				if(engine.getFood() <= 0){
+					JOptionPane.showMessageDialog(null, "You have starved to death and lost!");
+					engine.endGame();
+					dispose();
+				}
+
 			}
 		});
 
