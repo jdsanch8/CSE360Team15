@@ -16,6 +16,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.*;
 
 /**
  * main class and launcher for starting GUI
@@ -53,6 +55,7 @@ public class DiceGame15 extends Application {
 		newGame_btn.setOnAction(e -> {
 			String userName = UserTextInput.userTextInput("Enter your name: ");
 			WindowBuilderTest frame = new WindowBuilderTest(userName);
+			frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			frame.setVisible(true);
 		});
 

@@ -25,10 +25,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Choice;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+
 
 /**
  * Create the frame. */
  public class WindowBuilderTest extends JFrame {
+
 
 	private JPanel contentPane;
 	private JTextField txtFood;
@@ -58,6 +61,7 @@ import javax.swing.JComboBox;
 	}
 
 	public WindowBuilderTest(String name) {
+
 		Game engine = new Game(name);
 		boolean loc = UserConfirm.locConfirm("Pick your starting location: Forest gives wood; Mountains gives stone.");
 		if(loc)
@@ -127,6 +131,8 @@ import javax.swing.JComboBox;
 				txtStone.setText("Stone: " + engine.getStone()) ;
 				txtWood.setText("Wood: " + engine.getWood());
 				txtDays.setText("Days: " + engine.getDays());
+				JOptionPane.showMessageDialog(null, "You have won!");
+				dispose();
 			}
 		});
 
