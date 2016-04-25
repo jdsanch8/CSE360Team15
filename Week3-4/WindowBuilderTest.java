@@ -106,6 +106,8 @@ import javax.swing.JOptionPane;
 			public void mouseClicked(MouseEvent e) {
 				if(!engine.buildHouse())
 					txtTmp.setText("Not Enough Resources!");
+				else
+					btnBuildHouse.setVisible(false);
 				txtFood.setText("Food: " + engine.getFood());
 				txtStone.setText("Stone: " + engine.getStone()) ;
 				txtWood.setText("Wood: " + engine.getWood());
@@ -119,7 +121,9 @@ import javax.swing.JOptionPane;
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(!engine.buildFence())
-					txtTmp.setText("Not Enough Resources!");;
+					txtTmp.setText("Not Enough Resources!");
+				else
+					btnBuildFence.setVisible(false);
 				txtFood.setText("Food: " + engine.getFood());
 				txtStone.setText("Stone: " + engine.getStone()) ;
 				txtWood.setText("Wood: " + engine.getWood());
@@ -133,7 +137,9 @@ import javax.swing.JOptionPane;
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(!engine.buildFarm())
-					txtTmp.setText("Not Enough Resources!");;
+					txtTmp.setText("Not Enough Resources!");
+				else
+					btnBuildFarm.setVisible(false);
 				txtFood.setText("Food: " + engine.getFood());
 				txtStone.setText("Stone: " + engine.getStone()) ;
 				txtWood.setText("Wood: " + engine.getWood());
@@ -150,6 +156,8 @@ import javax.swing.JOptionPane;
 			public void mouseClicked(MouseEvent e) {
 				if(!engine.buildWell())
 					txtTmp.setText("Not Enough Resources!");
+				else
+					btnNewButton_1.setVisible(false);
 				txtFood.setText("Food: " + engine.getFood());
 				txtStone.setText("Stone: " + engine.getStone()) ;
 				txtWood.setText("Wood: " + engine.getWood());
@@ -164,6 +172,8 @@ import javax.swing.JOptionPane;
 			public void mouseClicked(MouseEvent e) {
 				if(!engine.buildMine())
 					txtTmp.setText("Not Enough Resources!");
+				else
+					btnBuildMine.setVisible(false);
 				txtFood.setText("Food: " + engine.getFood());
 				txtStone.setText("Stone: " + engine.getStone()) ;
 				txtWood.setText("Wood: " + engine.getWood());
@@ -178,6 +188,8 @@ import javax.swing.JOptionPane;
 			public void mouseClicked(MouseEvent e) {
 				if(!engine.buildMill())
 					txtTmp.setText("Not Enough Resources!");
+				else
+					btnBuildMill.setVisible(false);
 				txtFood.setText("Food: " + engine.getFood());
 				txtStone.setText("Stone: " + engine.getStone()) ;
 				txtWood.setText("Wood: " + engine.getWood());
