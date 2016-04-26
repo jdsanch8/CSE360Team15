@@ -25,8 +25,18 @@ public class UserHelp {
 		Stage help_stg = new Stage();
 		
 		//============================================================= title_lbl
-		Label title_lbl = new Label("help()");
-		title_lbl.setFont(Font.font("Cambria", 32));
+		Label title_lbl = new Label("Game Objective\n\n"
+				+ "The objective of the game is to build a farm. In order to gain the ability to do this,\n"
+				+ "you first need to build a house, a well, and a fence. You can build these structures by\n"
+				+ "using your resources of, wood and stone, which are acquired through each dice roll. If\n"
+				+ "you choose to build the optional structures, mill and mine, you can receive additional\n"
+				+ "resources on each dice roll. The mill will provide additional wood and the mine will\n"
+				+ "provide additional stone. Additionally, on each dice roll, you consume food and once you\n"
+				+ "run out of food the game ends. You can limit your food losses by building a well. A fence\n"
+				+ "will limit your resource losses in the event that your roll yields a disaster and a house\n"
+				+ "will increase your acquired resources in the event that your roll yields food, wood or stone.\n"
+				+ "Let's get building!");
+		title_lbl.setFont(Font.font("Cambria", 14));
 		
 		//============================================================= quit_btn
 		Button quit_btn = new Button("Go Back");
@@ -68,6 +78,5 @@ public class UserHelp {
 	}
 	
 }
-
 
 
