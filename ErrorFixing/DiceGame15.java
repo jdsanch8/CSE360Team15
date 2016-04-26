@@ -47,7 +47,7 @@ public class DiceGame15 extends Application {
 	public void start(Stage mainMenu_stg) throws Exception {
 
 		//============================================================= title_lbl
-		Label title_lbl = new Label("Welcome to DiceGame15");
+		Label title_lbl = new Label("Welcome to Mayor's Town");
 		title_lbl.setFont(Font.font("Cambria", 32));
 
 		//============================================================= start_btn
@@ -154,6 +154,5 @@ public class DiceGame15 extends Application {
 	}
 
 }
-
 
 
