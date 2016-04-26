@@ -1,36 +1,44 @@
 //package gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+//import java.awt.BorderLayout;
+//import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
+
+
+//import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
+
+
+//import javax.swing.SwingConstants;
 import javax.swing.AbstractAction;
-import javax.swing.Action;
+//import javax.swing.Action;
 import javax.swing.JTextField;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
+//import java.awt.GridBagLayout;
+//import java.awt.GridBagConstraints;
+//import java.awt.Insets;
+//import java.awt.GridLayout;
+//import javax.swing.JLabel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Choice;
-import javax.swing.JComboBox;
+
+
+//import java.awt.Choice;
+//import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 
 /**
  * Create the frame. */
- public class WindowBuilderTest extends JFrame {
+@SuppressWarnings("serial")
+public class WindowBuilderTest extends JFrame {
 
 
 	private JPanel contentPane;
@@ -136,8 +144,14 @@ import javax.swing.JOptionPane;
 		btnBuildFarm.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(!engine.buildFarm())
-					txtTmp.setText("Not Enough Resources!");
+				if(!engine.buildFarm()){
+					if (engine.requiredBuildingsStatus() != ""){
+						txtTmp.setText("The following buildings are required before building a farm: " + engine.requiredBuildingsStatus());
+					}
+					else{
+						txtTmp.setText("Not Enough Resources!");
+					}
+				}
 				else{
 					btnBuildFarm.setVisible(false);
 					JOptionPane.showMessageDialog(null, "You have won!");
@@ -233,74 +247,75 @@ import javax.swing.JOptionPane;
 		txtMill.setColumns(10);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(txtMill, GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
-						.addComponent(txtMine, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE))
-					.addGap(184))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(txtTmp_1)
-						.addComponent(txtTmp)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(txtFood, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(txtStone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(txtWood, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(txtDays, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(193, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(btnBuildMine)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnBuildMill)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnBuildFence)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton_1)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnBuildHouse)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnBuildFarm)
-					.addContainerGap(59, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(230, Short.MAX_VALUE)
-					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
-					.addGap(217))
-		);
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(txtMill, GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
+								.addComponent(txtMine, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE))
+								.addGap(184))
+								.addGroup(gl_contentPane.createSequentialGroup()
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(txtTmp_1)
+												.addComponent(txtTmp)
+												.addGroup(gl_contentPane.createSequentialGroup()
+														.addComponent(txtFood, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+														.addGap(18)
+														.addComponent(txtStone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+														.addGap(18)
+														.addComponent(txtWood, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+														.addGap(18)
+														.addComponent(txtDays, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+														.addContainerGap(193, Short.MAX_VALUE))
+														.addGroup(gl_contentPane.createSequentialGroup()
+																.addComponent(btnBuildMine)
+																.addPreferredGap(ComponentPlacement.RELATED)
+																.addComponent(btnBuildMill)
+																.addPreferredGap(ComponentPlacement.RELATED)
+																.addComponent(btnBuildFence)
+																.addPreferredGap(ComponentPlacement.RELATED)
+																.addComponent(btnNewButton_1)
+																.addPreferredGap(ComponentPlacement.RELATED)
+																.addComponent(btnBuildHouse)
+																.addPreferredGap(ComponentPlacement.UNRELATED)
+																.addComponent(btnBuildFarm)
+																.addContainerGap(59, Short.MAX_VALUE))
+																.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+																		.addContainerGap(230, Short.MAX_VALUE)
+																		.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
+																		.addGap(217))
+				);
 		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtFood, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtStone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtWood, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtDays, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(12)
-					.addComponent(txtTmp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(txtTmp_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(txtMine, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(txtMill, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(130)
-					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnBuildMine)
-						.addComponent(btnBuildMill)
-						.addComponent(btnBuildFence)
-						.addComponent(btnNewButton_1)
-						.addComponent(btnBuildHouse)
-						.addComponent(btnBuildFarm))
-					.addGap(58))
-		);
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(txtFood, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtStone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtWood, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtDays, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addGap(12)
+								.addComponent(txtTmp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(txtTmp_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(txtMine, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGap(18)
+								.addComponent(txtMill, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGap(130)
+								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+										.addComponent(btnBuildMine)
+										.addComponent(btnBuildMill)
+										.addComponent(btnBuildFence)
+										.addComponent(btnNewButton_1)
+										.addComponent(btnBuildHouse)
+										.addComponent(btnBuildFarm))
+										.addGap(58))
+				);
 		contentPane.setLayout(gl_contentPane);
 	}
 
+	@SuppressWarnings("unused")
 	private class SwingAction extends AbstractAction {
 		public SwingAction() {
 			putValue(NAME, "SwingAction");
