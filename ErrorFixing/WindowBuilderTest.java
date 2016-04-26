@@ -138,14 +138,16 @@ import javax.swing.JOptionPane;
 			public void mouseClicked(MouseEvent e) {
 				if(!engine.buildFarm())
 					txtTmp.setText("Not Enough Resources!");
-				else
+				else{
 					btnBuildFarm.setVisible(false);
+					JOptionPane.showMessageDialog(null, "You have won!");
+					dispose();
+				}
 				txtFood.setText("Food: " + engine.getFood());
 				txtStone.setText("Stone: " + engine.getStone()) ;
 				txtWood.setText("Wood: " + engine.getWood());
 				txtDays.setText("Days: " + engine.getDays());
-				JOptionPane.showMessageDialog(null, "You have won!");
-				dispose();
+
 			}
 		});
 
