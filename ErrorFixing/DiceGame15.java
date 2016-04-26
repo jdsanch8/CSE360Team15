@@ -54,9 +54,11 @@ public class DiceGame15 extends Application {
 		Button newGame_btn = new Button("New Game");
 		newGame_btn.setOnAction(e -> {
 			String userName = UserTextInput.userTextInput("Enter your name: ");
-			WindowBuilderTest frame = new WindowBuilderTest(userName);
-			frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-			frame.setVisible(true);
+			if (userName != ""){
+				WindowBuilderTest frame = new WindowBuilderTest(userName);
+				frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+				frame.setVisible(true);
+			}
 		});
 
 
