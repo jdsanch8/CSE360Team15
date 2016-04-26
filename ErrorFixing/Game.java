@@ -1,10 +1,10 @@
 //package gui;
-import java.util.Scanner;
+//import java.util.Scanner;
 import java.util.ArrayList;
 
 
 public class Game{
-	private static Scanner in = new Scanner(System.in);
+	//private static Scanner in = new Scanner(System.in);
 	private String playerName;
 	private int victory;
 	private int environment;
@@ -156,6 +156,20 @@ public class Game{
 		}
 		return false;
 	}
+	
+	public String requiredBuildingsStatus(){
+		String unbuiltBuildings = "";
+		if (!myBuildings.getWell()){
+			unbuiltBuildings += "Well ";
+		}
+		if (!myBuildings.getFence()){
+			unbuiltBuildings += "Fence ";
+		}
+		if (!myBuildings.getHouse()){
+			unbuiltBuildings += "House ";
+		}
+		return unbuiltBuildings;
+	}
 
 	public void endGame(){
 		updateRecord();
@@ -202,9 +216,9 @@ public class Game{
 	 * Setter method for enviroment
 	 * @param environmentIn chosen enviroment
 	 */
-	private void setEnvironment(int environmentIn){
+	/*private void setEnvironment(int environmentIn){
 		environment = environmentIn;
-	}
+	}*/
 
 	/**
 	 * Setter method for days
