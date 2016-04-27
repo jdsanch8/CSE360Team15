@@ -10,27 +10,37 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
+import javax.swing.JToolBar;
+
+//reformat test 26   8:55
 
 @SuppressWarnings("serial")
 public class StatsPopUp extends JDialog {
 
-
+	
 	private final JPanel contentPanel = new JPanel();
 
 	/**
-	 * Launch the application.	 */
-
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			StatsPopUp dialog = new StatsPopUp();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Create the dialog.
 	 */
 	public StatsPopUp() {
-
+		
 		Statistics statGUI = new Statistics("NULL");
-
-
+		
+		
 		setBounds(100, 100, 600, 500);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -46,27 +56,59 @@ public class StatsPopUp extends JDialog {
 			//textArea.setTabSize(2);
 			statGUI.viewStatsInGUI(textArea);
 			scrollPane.setViewportView(textArea);
+			{
+				JToolBar toolBar = new JToolBar();
+				scrollPane.setColumnHeaderView(toolBar);
+				{
+					JLabel lblNewLabel_2 = new JLabel("      ");
+					toolBar.add(lblNewLabel_2);
+				}
+				{
+					JLabel lblNewLabel = new JLabel("Player Name");
+					toolBar.add(lblNewLabel);
+				}
+				{
+					JLabel lblNewLabel_3 = new JLabel("                       ");
+					toolBar.add(lblNewLabel_3);
+				}
+				{
+					JLabel lblVictory = new JLabel("Victory");
+					toolBar.add(lblVictory);
+				}
+				{
+					JLabel lblNewLabel_4 = new JLabel("   ");
+					toolBar.add(lblNewLabel_4);
+				}
+				{
+					JLabel lblDays = new JLabel("Days");
+					toolBar.add(lblDays);
+				}
+				{
+					JLabel lblNewLabel_5 = new JLabel("   ");
+					toolBar.add(lblNewLabel_5);
+				}
+				{
+					JLabel lblNewLabel_6 = new JLabel("Buildings");
+					toolBar.add(lblNewLabel_6);
+				}
+				{
+					JLabel label = new JLabel("   ");
+					toolBar.add(label);
+				}
+				{
+					JLabel lblResources = new JLabel("Resources");
+					toolBar.add(lblResources);
+				}
+				{
+					JLabel lblNewLabel_1 = new JLabel("");
+					toolBar.add(lblNewLabel_1);
+				}
+			}
 		}
 		{
-			JPanel panel = new JPanel();
-			contentPanel.add(panel, BorderLayout.NORTH);
-
-			JLabel lblNewLabel = new JLabel("      Player Name                                 Victory   Days   Buildings   Resources       ");
-			GroupLayout gl_panel = new GroupLayout(panel);
-			gl_panel.setHorizontalGroup(
-				gl_panel.createParallelGroup(Alignment.LEADING)
-					.addGroup(gl_panel.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 557, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(27, Short.MAX_VALUE))
-			);
-			gl_panel.setVerticalGroup(
-				gl_panel.createParallelGroup(Alignment.LEADING)
-					.addGroup(gl_panel.createSequentialGroup()
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(lblNewLabel))
-			);
-			panel.setLayout(gl_panel);
+			
+			//"      Player Name                       Victory   Days   Buildings   Resources       "
+			
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -75,18 +117,15 @@ public class StatsPopUp extends JDialog {
 			{
 				JButton okButton = new JButton("OK");
 				okButton.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-				   dispose();
-				}
-			});
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						dispose();
+					}
+				});
+				//okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				//JButton cancelButton = new JButton("Cancel");
-				//cancelButton.setActionCommand("Cancel");
-				//buttonPane.add(cancelButton);
+				
 			}
 		}
 
