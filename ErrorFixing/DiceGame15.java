@@ -41,7 +41,7 @@ public class DiceGame15 extends Application {
 	 * GUI for main menu and starting point for app
 	 * @param Stage mainMenu_stg - used for main menu
 	 * @author nathan kelly
-	 * @version 4.22.1138
+	 * @version 4.27.2330
 	 */
 	@Override
 	public void start(Stage mainMenu_stg) throws Exception {
@@ -58,6 +58,21 @@ public class DiceGame15 extends Application {
 				WindowBuilderTest frame = new WindowBuilderTest(userName);
 				frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 				frame.setVisible(true);
+			}
+		});
+		
+		newGame_btn.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent e) {
+				if (e.getCode() == KeyCode.ENTER) {
+					String userName = UserTextInput.userTextInput("Enter your name: ");
+					if (userName != ""){
+						WindowBuilderTest frame = new WindowBuilderTest(userName);
+						frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+						frame.setVisible(true);
+					}
+				}
 			}
 		});
 
