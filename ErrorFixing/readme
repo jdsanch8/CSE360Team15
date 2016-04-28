@@ -3,6 +3,7 @@ DiceGame15.java   - to make consistent with main menu controls
 UserConfirm.java    - to make consistent with main menu controls
 UserHelp.java   - to make consistent with main menu controls
 UserTextInput.java    - to make consistent with main menu controls/fixed bugs
+*found error with escape key press during starting location automatically chooses a location and begins game rather than cancelling (unfixed)
 
 Up to date code as of 4/25/2016 12:03 am
 
