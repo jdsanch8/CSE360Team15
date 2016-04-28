@@ -13,7 +13,7 @@ import javafx.event.EventHandler;
 /**
  * GUI user confirmation prompt
  * @author nathan kelly
- * @version 4.11.1400
+ * @version 4.27.2347
  */
 public class UserConfirm {
 
@@ -24,7 +24,7 @@ public class UserConfirm {
 	 * @param message - yes/no prompt
 	 * @return confirm - user response
 	 * @author nathan kelly
-	 * @version 4.11.1400
+	 * @version 4.27.2330
 	 */
 	public static boolean yesNoConfirm(String message) {
 
@@ -45,12 +45,34 @@ public class UserConfirm {
 			confirm = true;
 			confirm_stg.close();
 		});
+		
+		yes_btn.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent e) {
+				if (e.getCode() == KeyCode.ENTER) {
+					confirm = true;
+					confirm_stg.close();
+				}
+			}
+		});
 
 		//============================================================= no_btn
 		Button no_btn = new Button("No");
 		no_btn.setOnAction(e -> {
 			confirm = false;
 			confirm_stg.close();
+		});
+		
+		no_btn.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent e) {
+				if (e.getCode() == KeyCode.ENTER) {
+					confirm = false;
+					confirm_stg.close();
+				}
+			}
 		});
 
 		//============================================================= menu_vbx
@@ -65,11 +87,7 @@ public class UserConfirm {
 
 			@Override
 			public void handle(KeyEvent e) {
-				if (e.getCode() == KeyCode.ENTER) {
-					confirm = true;
-					confirm_stg.close();
-				}
-				else if (e.getCode() == KeyCode.ESCAPE) {
+				if (e.getCode() == KeyCode.ESCAPE) {
 					confirm = false;
 					confirm_stg.close();
 				}

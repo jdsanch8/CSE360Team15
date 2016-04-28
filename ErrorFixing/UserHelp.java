@@ -1,8 +1,11 @@
 
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
@@ -18,7 +21,7 @@ public class UserHelp {
 	/**
 	 * ...
 	 * @author nathan kelly
-	 * @version 4.13.1100
+	 * @version 4.27.2330
 	 */
 	public static void userHelp() {
 			
@@ -41,9 +44,16 @@ public class UserHelp {
 		//============================================================= quit_btn
 		Button quit_btn = new Button("Go Back");
 		quit_btn.setOnAction(e-> {
-//			if (UserConfirm.yesNoConfirm("Go Back?") ) {
 				help_stg.close();
-//			}
+		});
+		quit_btn.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent e) {
+				if (e.getCode() == KeyCode.ENTER) {
+						help_stg.close();
+				}
+			}
 		});
 		
 		
@@ -56,23 +66,31 @@ public class UserHelp {
 		layout.getChildren().add(quit_btn);
 		
 		
-		Scene intro_scn = new Scene(layout, 600, 600);
+		//============================================================= help_scn
+		Scene help_scn = new Scene(layout, 600, 600);
+		help_scn.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent e) {
+				if (e.getCode() == KeyCode.ESCAPE) {
+					help_stg.close();
+				}
+			}
+		});
 		
 		
-		//============================================================= rankings_stg
+		//============================================================= help_stg
 		help_stg.initModality(Modality.APPLICATION_MODAL);
-		help_stg.setTitle("Rankings");
+		help_stg.setTitle("Help");
 		help_stg.setOnCloseRequest(e-> {
 			e.consume();
-//			if (UserConfirm.yesNoConfirm("Are you done viewing rankings?") ) {
 				help_stg.close();
-//			}
 		});
 		help_stg.setMinHeight(600);
 		help_stg.setMaxHeight(600);
 		help_stg.setMinWidth(600);
 		help_stg.setMaxWidth(600);
-		help_stg.setScene(intro_scn);
+		help_stg.setScene(help_scn);
 		help_stg.show();
 			
 	}

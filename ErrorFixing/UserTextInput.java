@@ -14,7 +14,7 @@ import javafx.event.EventHandler;
 /**
  * GUI user text input pop up
  * @author nathan kelly
- * @version 4.22.1131
+ * @version 4.27.2338
  */
 public class UserTextInput {
 	
@@ -25,7 +25,7 @@ public class UserTextInput {
 	 * @param message - yes/no prompt
 	 * @return confirm - user response
 	 * @author nathan kelly
-	 * @version 4.11.1400
+	 * @version 4.27.2338
 	 */
 	public static String userTextInput(String message) {
 				
@@ -57,7 +57,7 @@ public class UserTextInput {
 			
 		});
 	
-		//============================================================= yes_btn
+		//============================================================= enter_btn
 		Button enter_btn = new Button("Enter");
 		enter_btn.setOnAction(e -> {
 			userResponse = userInput_txt.getText();
@@ -66,11 +66,36 @@ public class UserTextInput {
 			}
 		});
 		
-		//============================================================= no_btn
+		enter_btn.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent e) {
+				userResponse = userInput_txt.getText();
+				if (e.getCode() == KeyCode.ENTER) {
+					userResponse = userInput_txt.getText();
+					if(userResponse.compareTo("") != 0) {
+						userTextInput_stg.close();
+					}
+				}
+			}
+		});
+		
+		//============================================================= cancel_btn
 		Button cancel_btn = new Button("Cancel");
 		cancel_btn.setOnAction(e -> {
 			userResponse = "";
 			userTextInput_stg.close();
+		});
+		
+		cancel_btn.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent e) {
+				if (e.getCode() == KeyCode.ENTER) {
+					userResponse = "";
+					userTextInput_stg.close();
+				}
+			}
 		});
 		
 		//============================================================= menu_vbx
@@ -86,6 +111,7 @@ public class UserTextInput {
 			@Override
 			public void handle(KeyEvent e) {
 				if (e.getCode() == KeyCode.ESCAPE) {
+					userResponse = "";
 					userTextInput_stg.close();
 				}
 			}
