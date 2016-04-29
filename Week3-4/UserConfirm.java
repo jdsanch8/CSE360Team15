@@ -12,8 +12,8 @@ import javafx.event.EventHandler;
 
 /**
  * GUI user confirmation prompt
- * @author nathan kelly
- * @version 4.27.2347
+ * @author Team 15
+ * @version April 29, 2016
  */
 public class UserConfirm {
 
@@ -23,8 +23,6 @@ public class UserConfirm {
 	 * prompts user with a yes/no question and returns true or false from user
 	 * @param message - yes/no prompt
 	 * @return confirm - user response
-	 * @author nathan kelly
-	 * @version 4.27.2330
 	 */
 	public static boolean yesNoConfirm(String message) {
 
