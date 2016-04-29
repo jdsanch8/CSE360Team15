@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 /**
  * Game manager that interfaces all the gameplay functions.
- * Team 15
+ /** Tests the Buildings class for different cases.
+ * @author Team 15
+ * @version April 29, 2016
  */
 public class Game{
 	//private static Scanner in = new Scanner(System.in);
