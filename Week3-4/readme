@@ -1,7 +1,4 @@
-Current Worklog:
+To run program  (Group15DiceGame.jar file):
 
-Make it not look ugly.
-*Currently built buildings are simply removed as an option, we will have to decide if we want them to be able to see what
-they have built already*
-
-It wouldn't let me commit anything to this folder, so I had to make antoher folder called error checking.
+   Open terminal/command prompt and type:  
+            java -jar Group15DiceGame.jar
