@@ -14,7 +14,7 @@ import javax.swing.JTextArea;
  * are looked at).  Lastly, if all statistics are the same, the listing is done in alphabetical order.
  *
  * @author Team 15
- * @version April 13, v.3
+ * @version April 29, 2016
  */
 
 public class Statistics {
