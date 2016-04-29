@@ -77,7 +77,7 @@ public class WindowBuilderTest extends JFrame {
 		else
 			engine.setStone(5);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 552, 428);
+		setBounds(100, 100, 625, 552);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
