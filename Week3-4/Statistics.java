@@ -3,8 +3,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.JTextArea;
 
-
-
 /**
  * Class Statistics collects player name, statistic of a win or loss by player, days survived by player, buildings made by player, and
  * resources made by player.  The class creates or appends a data file of these statistics in the folder of the java project.  More specifically,
@@ -15,7 +13,7 @@ import javax.swing.JTextArea;
  * with more buildings will be ranked higher).  The least weighted statistic is resources (if all other statistics are the same, resources
  * are looked at).  Lastly, if all statistics are the same, the listing is done in alphabetical order.
  *
- * @author Gregory Benjamin
+ * @author Team 15
  * @version April 13, v.3
  */
 
