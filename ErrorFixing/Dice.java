@@ -1,7 +1,7 @@
 /**
  * Generators random results, and modifies the values in the game object accordingly
  * @author Team 15
- * @version April 29, 2016 *
+ * @version April 29, 2016
  */
 
 //import java.lang.*;
