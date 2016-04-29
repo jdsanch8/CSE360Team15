@@ -41,22 +41,39 @@ public class DiceGame15 extends Application {
 	 * GUI for main menu and starting point for app
 	 * @param Stage mainMenu_stg - used for main menu
 	 * @author nathan kelly
-	 * @version 4.22.1138
+	 * @version 4.27.2330
 	 */
 	@Override
 	public void start(Stage mainMenu_stg) throws Exception {
 
 		//============================================================= title_lbl
-		Label title_lbl = new Label("Welcome to DiceGame15");
+		Label title_lbl = new Label("Welcome to Mayor's Town");
 		title_lbl.setFont(Font.font("Cambria", 32));
 
 		//============================================================= start_btn
 		Button newGame_btn = new Button("New Game");
 		newGame_btn.setOnAction(e -> {
 			String userName = UserTextInput.userTextInput("Enter your name: ");
-			WindowBuilderTest frame = new WindowBuilderTest(userName);
-			frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-			frame.setVisible(true);
+			if (userName != ""){
+				WindowBuilderTest frame = new WindowBuilderTest(userName);
+				frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+				frame.setVisible(true);
+			}
+		});
+		
+		newGame_btn.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent e) {
+				if (e.getCode() == KeyCode.ENTER) {
+					String userName = UserTextInput.userTextInput("Enter your name: ");
+					if (userName != ""){
+						WindowBuilderTest frame = new WindowBuilderTest(userName);
+						frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+						frame.setVisible(true);
+					}
+				}
+			}
 		});
 
 
@@ -154,6 +171,5 @@ public class DiceGame15 extends Application {
 	}
 
 }
-
 
 
