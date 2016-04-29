@@ -13,11 +13,11 @@ import java.awt.event.MouseEvent;
 import javax.swing.JToolBar;
 
 /**
- * 
- * @author gregbenj
- *
+ * StatsPopUp is a popup window that displays game statistics saved in a file.  When
+ * a list of statistics exceeds window size, a scroll bar appears in window for viewing
+ * entire list.  "Okay" button, when pressed, closes window and brings user back to game.
+ * @author team 15
  */
-
 @SuppressWarnings("serial")
 public class StatsPopUp extends JDialog {
 
