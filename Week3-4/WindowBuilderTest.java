@@ -1,37 +1,21 @@
-//package gui;
-
-//import java.awt.BorderLayout;
-//import java.awt.EventQueue;
+/**
+* Central GUI for gameplay
+* @version April 29,2016
+* @author Group 15
+*/
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
-
-
-//import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
-
-//import javax.swing.SwingConstants;
 import javax.swing.AbstractAction;
-//import javax.swing.Action;
 import javax.swing.JTextField;
-//import java.awt.GridBagLayout;
-//import java.awt.GridBagConstraints;
-//import java.awt.Insets;
-//import java.awt.GridLayout;
-//import javax.swing.JLabel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-
-//import java.awt.Choice;
-//import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 
@@ -52,22 +36,42 @@ public class WindowBuilderTest extends JFrame {
 	private JTextField txtMill;
 
 
+	/**
+	* Sets the multiplier value to print out
+	* @param string containing mult information
+	*/
 	public void setMult(String in){
 		txtTmp.setText(in);
 	}
 
+	/**
+	* Sets the event value to print out
+	* @param string containing event information
+	*/
 	public void setEvent(String in){
 		txtTmp_1.setText(in);
 	}
 
+	/**
+	* Sets the mill value to print out
+	* @param string containing mill information
+	*/
 	public void setMill(String in){
 		txtMill.setText(in);
 	}
 
+	/**
+	* Sets the mine value to print out
+	* @param string containing mine information
+	*/
 	public void setMine(String in){
 		txtMine.setText(in);
 	}
 
+	/**
+	* Construct - Sets up the entire GUI, and handles button listeners
+	* @param - The name of the player
+	*/
 	public WindowBuilderTest(String name) {
 
 		Game engine = new Game(name);
