@@ -13,8 +13,8 @@ import javafx.event.EventHandler;
 
 /**
  * GUI user text input pop up
- * @author nathan kelly
- * @version 4.27.2338
+ * @author Team 15
+ * @version April 29, 2016
  */
 public class UserTextInput {
 	
@@ -24,8 +24,6 @@ public class UserTextInput {
 	 * prompts user with a question and returns String with response
 	 * @param message - yes/no prompt
 	 * @return confirm - user response
-	 * @author nathan kelly
-	 * @version 4.27.2338
 	 */
 	public static String userTextInput(String message) {
 				
