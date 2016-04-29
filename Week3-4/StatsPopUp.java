@@ -12,7 +12,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JToolBar;
 
-//reformat test 26   8:55
+/**
+ * 
+ * @author gregbenj
+ *
+ */
 
 @SuppressWarnings("serial")
 public class StatsPopUp extends JDialog {
@@ -21,7 +25,7 @@ public class StatsPopUp extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 
 	/**
-	 * Launch the application.
+	 * Launch the stats popup window
 	 */
 	public static void main(String[] args) {
 		try {
@@ -40,7 +44,6 @@ public class StatsPopUp extends JDialog {
 		
 		Statistics statGUI = new Statistics("NULL");
 		
-		
 		setBounds(100, 100, 600, 500);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -51,9 +54,7 @@ public class StatsPopUp extends JDialog {
 			contentPanel.add(scrollPane, BorderLayout.CENTER);
 			JTextArea textArea = new JTextArea();
 			textArea.setFont(new Font("Monospaced", textArea.getFont().getStyle(), 12));
-			//textArea.setLineWrap(true);
 			textArea.setEditable(false);
-			//textArea.setTabSize(2);
 			statGUI.viewStatsInGUI(textArea);
 			scrollPane.setViewportView(textArea);
 			{
@@ -106,11 +107,6 @@ public class StatsPopUp extends JDialog {
 			}
 		}
 		{
-			
-			//"      Player Name                       Victory   Days   Buildings   Resources       "
-			
-		}
-		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
@@ -122,12 +118,9 @@ public class StatsPopUp extends JDialog {
 						dispose();
 					}
 				});
-				//okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-				
+				getRootPane().setDefaultButton(okButton);	
 			}
 		}
-
 	}
 }
