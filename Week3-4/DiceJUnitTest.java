@@ -2,6 +2,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/** Tests the Dice class for different cases.
+ * @author Team 15
+ * @version April 29, 2016
+ */
 public class DiceJUnitTest {
 
 	@Test
