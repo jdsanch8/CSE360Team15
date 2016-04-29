@@ -36,7 +36,7 @@ public class Statistics {
 	 * @param playerName is player's name, inputed by player
 	 * @throws IOException if file doesn't exist and is unable to be created
 	 */
-
+	
 	public Statistics(String playerName) {
 
 		this.victory = 0;
@@ -54,7 +54,11 @@ public class Statistics {
 		}
 	}
 
-
+	/**
+	 * Displays statistics for all players that completed the game
+	 * @param text the GUI text area that gets updated to display the statistics
+	 */
+	
 	public void viewStatsInGUI(JTextArea text)
 	{
 		String token []; // holds parsed statistics obtained from line of txt file

@@ -2,12 +2,14 @@
 //import java.util.Scanner;
 import java.util.ArrayList;
 
-
+/**
+ * Game manager that interfaces all the gameplay functions.
+ * Team 15
+ */
 public class Game{
 	//private static Scanner in = new Scanner(System.in);
 	private String playerName;
 	private int victory;
-	private int environment;
 	private int days;
 	private int food;
 	private int buildings;
@@ -40,11 +42,19 @@ public class Game{
 		foodDec = -3;
 	}
 
-
+	/**
+	 * Rolls the multiplier die
+	 * @return the value rolled
+	 */
 	public int rollMult(){
 		return dieClass.rollMultiplier();
 	}
 
+	/**
+	 * Rolls the mill die
+	 * @param mult the value that the result of the mill die will be multiplied by
+	 * @return string with the outcome of rolling the mill die
+	 */
 	public String rollMill(int mult){
 		String out = "";
 		if(myBuildings.getMill()){
@@ -53,6 +63,11 @@ public class Game{
 		return out;
 	}
 
+	/**
+	 * Rolls the mine die
+	 * @param mult the value that the result of the mine die will be multiplied by
+	 * @return string with the outcome of rolling the mine die
+	 */
 	public String rollMine(int mult){
 		String out = "";
 		if(myBuildings.getMine()){
@@ -61,6 +76,11 @@ public class Game{
 		return out;
 	}
 
+	/**
+	 * Rolls the event die
+	 * @param mult the value that the result of the mine die will be multiplied by
+	 * @return string with the outcome of rolling the mine die
+	 */
 	public String rollEvent(int mult){
 		String out = "";
 		out = dieClass.rollBase(mult, this);
@@ -69,53 +89,46 @@ public class Game{
 		return out;
 	}
 
-
 	/**
-	 * Provides an explanation on how to play the game
-
-	private void helpScreen(){
-		System.out.println("Game Objective\n\nThe objective of the game is to build a farm. In order to gain the ability to do this,\n"
-				+ "you first need to build a house, a well, and a fence. You can build these structures by using your resources of,\n"
-				+ "wood and stone, which are acquired through each dice roll. If you choose to build the optional structures, mill\n"
-				+ "and mine, you can receive additional resources on each dice roll. The mill will provide additional wood and the\n"
-				+ "mine will provide additional stone. Additionally, on each dice roll, you consume food and once you run out of food\n"
-				+ "the game ends. You can limit your food losses by building a well. A fence will limit your resource losses in the\n"
-				+ "event that your roll yields a disaster and a house will increase your acquired resources in the event that your roll\n"
-				+ "yields food, wood or stone. Let's get building!");
-	}
-
-
-
-	/**
-	 * Builds a building depending on the users choice
-	 * @param choice number corresponding with the building they want, given to them by print buildings
+	 * Builds a Mine
+	 * @return true or false depending on if the mine was built or not
 	 */
-
 	public boolean buildMine(){
+		boolean built = false;
 		if(!myBuildings.getMine()){
 			if(myBuildings.buildMine(wood))	{
 				wood -= 5;
 				builtBuildings[buildingCount] = "Mine";
 				buildingCount++;
-				return true;
+				built = true;
 			}
 		}
-		return false;
+		return built;
 	}
 
+	/**
+	 * Builds a Mill
+	 * @return true or false depending on if the mill was built or not
+	 */
 	public boolean buildMill(){
+		boolean built = false;
 		if(!myBuildings.getMill()){
 			if(myBuildings.buildMill(stone)){
 				stone -= 5;
 				builtBuildings[buildingCount] = "Mill";
 				buildingCount++;
-				return true;
+				built = true;
 			}
 		}
-		return false;
+		return built;
 	}
 
+	/**
+	 * Builds a House
+	 * @return true or false depending on if the house was built or not
+	 */
 	public boolean buildHouse(){
+		boolean built = false;
 		if(!myBuildings.getHouse()){
 			if(myBuildings.buildHouse(stone, wood)){
 				stone -= 5;
@@ -123,13 +136,18 @@ public class Game{
 				dieClass.upGradeMulti();
 				builtBuildings[buildingCount] = "House";
 				buildingCount++;
-				return true;
+				built = true;
 			}
 		}
-		return false;
+		return built;
 	}
 
+	/**
+	 * Builds a Fence
+	 * @return true or false depending on if the fence was built or not
+	 */
 	public boolean buildFence(){
+		boolean built = false;
 		if(!myBuildings.getFence()){
 			if(myBuildings.buildFence(stone, wood)){
 				stone -= 2;
@@ -137,13 +155,18 @@ public class Game{
 				dieClass.deGradeDespairMulti();
 				builtBuildings[buildingCount] = "Fence";
 				buildingCount++;
-				return true;
+				built = true;
 			}
 		}
-		return false;
+		return built;
 	}
 
+	/**
+	 * Builds a Well
+	 * @return true or false depending on if the well was built or not
+	 */
 	public boolean buildWell(){
+		boolean built = false;
 		if(!myBuildings.getWell()){
 			if(myBuildings.buildWell(stone, wood)){
 				stone -= 5;
@@ -151,12 +174,16 @@ public class Game{
 				builtBuildings[buildingCount] = "Well";
 				buildingCount++;
 				foodDec = -2;
-				return true;
+				built = true;
 			}
 		}
-		return false;
+		return built;
 	}
 	
+	/**
+	 * Prints the completion status of the required buildings to build a farm
+	 * @return a string containing the buildings that still need to be built
+	 */
 	public String requiredBuildingsStatus(){
 		String unbuiltBuildings = "";
 		if (!myBuildings.getWell()){
@@ -171,6 +198,9 @@ public class Game{
 		return unbuiltBuildings;
 	}
 
+	/**
+	 * Records the results of the current game before its terminated
+	 */
 	public void endGame(){
 		updateRecord();
 		gameStats.writeToFile();
@@ -178,7 +208,12 @@ public class Game{
 		gameStats.writeListToFile(statisticsList);
 	}
 
+	/**
+	 * Builds a Farm
+	 * @return true or false depending on if the farm was built or not
+	 */
 	public boolean buildFarm(){
+		boolean built = false;
 		if(myBuildings.getHouse() && myBuildings.getFence() && myBuildings.getWell()){
 			if(myBuildings.buildFarm(stone, wood, food)) {
 				stone -= 3;
@@ -187,16 +222,16 @@ public class Game{
 				builtBuildings[buildingCount] = "Farm";
 				buildingCount++;
 				victory = 1;
-				updateRecord();
-				gameStats.writeToFile();
-				statisticsList = gameStats.makeArrayList();
-				gameStats.writeListToFile(statisticsList);
-				return true;
+				endGame();
+				built = true;
 			}
 		}
-		return false;
+		return built;
 	}
 
+	/**
+	 * Sends the final results of the game to that Statistics object to be stored permanently
+	 */
 	private void updateRecord(){
 		gameStats.setVictory(victory);
 		gameStats.setDays(days);
@@ -211,14 +246,6 @@ public class Game{
 	private void setName(String nameIn){
 		playerName = nameIn;
 	}
-
-	/**
-	 * Setter method for enviroment
-	 * @param environmentIn chosen enviroment
-	 */
-	/*private void setEnvironment(int environmentIn){
-		environment = environmentIn;
-	}*/
 
 	/**
 	 * Setter method for days
@@ -269,14 +296,6 @@ public class Game{
 	}
 
 	/**
-	 * Getter method for enviroment
-	 * @return number corresponding with chosen enviroment
-	 */
-	public int getEnvironment(){
-		return environment;
-	}
-
-	/**
 	 * Getter method for days
 	 * @return number of days that have passed
 	 */
@@ -316,6 +335,10 @@ public class Game{
 		return stone;
 	}
 
+	/**
+	 * Updates the player's stone resources
+	 * @param stoneIn the value to update the stone resources by
+	 */
 	public void updateStone(int stoneIn){
 		stone = stone + stoneIn;
 		if (stone < 0){
@@ -323,6 +346,10 @@ public class Game{
 		}
 	}
 
+	/**
+	 * Updates the player's wood resources
+	 * @param stoneIn the value to update the wood resources by
+	 */
 	public void updateWood(int woodIn){
 		wood = wood + woodIn;
 		if (wood < 0){
@@ -330,6 +357,10 @@ public class Game{
 		}
 	}
 
+	/**
+	 * Updates the player's food resources
+	 * @param stoneIn the value to update the food resources by
+	 */
 	public void updateFood(int foodIn){
 		food = food + foodIn;
 		if (food < 0){
@@ -337,6 +368,10 @@ public class Game{
 		}
 	}
 
+	/**
+	 * Provides a die for JUnit testing
+	 * @return a Dice object
+	 */
 	public Dice getDice(){
 		return dieClass;
 	}

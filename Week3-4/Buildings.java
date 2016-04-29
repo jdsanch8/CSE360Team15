@@ -38,6 +38,7 @@ public class Buildings {
 	/** Sets house variable to true if the requirements are met
 	 *  @param stone	integer resource checked
 	 *  @param wood		integer resource checked
+	 *  @return boolean depending on if the house was built or not
 	 */
 	public boolean buildHouse(int stone, int wood){
 
@@ -52,7 +53,7 @@ public class Buildings {
 				house = true;
 				houseBuilt = true;
 			}
-		built = house;
+			built = house;
 		}
 		return built;
 	}
@@ -60,6 +61,7 @@ public class Buildings {
 	/** Sets fence variable to true if the requirements are met
 	 *  @param stone	integer resource checked
 	 *  @param wood		integer resource checked
+	 *  @return boolean depending on if the fence was built or not
 	 */
 	public boolean buildFence(int stone, int wood){
 
@@ -75,7 +77,7 @@ public class Buildings {
 				fence = true;
 				fenceBuilt = true;
 			}
-		built = fence;
+			built = fence;
 		}
 		return built;
 	}
@@ -83,6 +85,7 @@ public class Buildings {
 	/** Sets well variable to true if the requirements are met
 	 *  @param stone	integer resource checked
 	 *  @param wood		integer resource checked
+	 *  @return boolean depending on if the well was built or not
 	 */
 	public boolean buildWell(int stone, int wood){
 
@@ -97,7 +100,7 @@ public class Buildings {
 				well = true;
 				wellBuilt = true;
 			}
-		built = well;
+			built = well;
 		}
 		return built;
 	}
@@ -105,6 +108,7 @@ public class Buildings {
 	/** Sets mill variable to true if the requirements are met
 	 *  @param stone	integer resource checked
 	 *  @param wood		integer resource checked
+	 *  @return boolean depending on if the mill was built or not
 	 */
 	public boolean buildMill(int stone){
 
@@ -119,7 +123,7 @@ public class Buildings {
 				mill = true;
 				millBuilt = true;
 			}
-		built = mill;
+			built = mill;
 		}
 		return built;
 	}
@@ -127,6 +131,7 @@ public class Buildings {
 	/** Sets mine variable to true if the requirements are met
 	 *  @param stone	integer resource checked
 	 *  @param wood		integer resource checked
+	 *  @return boolean depending on if the mine was built or not
 	 */
 	public boolean buildMine(int wood){
 
@@ -141,7 +146,7 @@ public class Buildings {
 				mine = true;
 				mineBuilt = true;
 			}
-		built = mine;
+			built = mine;
 		}
 		return built;
 	}
@@ -150,10 +155,11 @@ public class Buildings {
 	 *  @param stone	integer resource checked
 	 *  @param wood		integer resource checked
 	 *  @param food		integer resource checked
+	 *  @return boolean depending on if the farm was built or not
 	 */
 	public boolean buildFarm(int stone, int wood, int food){
 
-		// Checks if it is already built
+		// Checks if required buildings are already built
 		if(houseBuilt && fenceBuilt && wellBuilt){
 
 			// Checks if the necessary resources are available for construction
@@ -164,32 +170,50 @@ public class Buildings {
 		return farm;
 	}
 
-	/** Returns the house variable */
+	/**
+	 * Getter method for the completion status of the house
+	 * @return boolean depending on the value of house
+	 */
 	public boolean getHouse(){
 		return house;
 	}
 
-	/** Returns the fence variable */
+	/**
+	 * Getter method for the completion status of the fence
+	 * @return boolean depending on the value of fence
+	 */
 	public boolean getFence(){
 		return fence;
 	}
 
-	/** Returns the well variable */
+	/**
+	 * Getter method for the completion status of the well
+	 * @return boolean depending on the value of well
+	 */
 	public boolean getWell(){
 		return well;
 	}
 
-	/** Returns the mill variable */
+	/**
+	 * Getter method for the completion status of the mill
+	 * @return boolean depending on the value of mill
+	 */
 	public boolean getMill(){
 		return mill;
 	}
 
-	/** Returns the mine variable */
+	/**
+	 * Getter method for the completion status of the mine
+	 * @return boolean depending on the value of mine
+	 */
 	public boolean getMine(){
 		return mine;
 	}
 
-	/** Returns the farm variable */
+	/**
+	 * Getter method for the completion status of the farm
+	 * @return boolean depending on the value of farm
+	 */
 	public boolean getFarm(){
 		return farm;
 	}
