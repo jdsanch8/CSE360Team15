@@ -1,4 +1,3 @@
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,28 +20,16 @@ import javax.swing.*;
 
 /**
  * main class and launcher for starting GUI
- * @author nathan kelly
- * @version 4.11.1400
- *
+ * @author Team 15
+ * @version April 11, 2016
  */
+
 public class DiceGame15 extends Application {
 
-	/**
-	 * ...?
-	 * @param args
-	 * @author nathan kelly
-	 * @version 4.11.1400
-	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
 
-	/**
-	 * GUI for main menu and starting point for app
-	 * @param Stage mainMenu_stg - used for main menu
-	 * @author nathan kelly
-	 * @version 4.27.2330
-	 */
 	@Override
 	public void start(Stage mainMenu_stg) throws Exception {
 
@@ -171,5 +158,3 @@ public class DiceGame15 extends Application {
 	}
 
 }
-
-

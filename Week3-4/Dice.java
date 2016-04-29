@@ -1,5 +1,7 @@
 /**
- * Generates random results, and modifies the values in the game object accordingly
+ * Generators random results, and modifies the values in the game object accordingly
+ * @author Team 15
+ * @version April 29, 2016
  */
 
 //import java.lang.*;
@@ -26,7 +28,6 @@ public class Dice{
 		fence = false;
 		goodLuck = false;
 	}
-
 	/**
 	 * Rolls a die, depending on size of multipler, and returns the result
 	 * @return the randomly generated integer value
@@ -50,9 +51,8 @@ public class Dice{
 
 	/**
 	 * Rolls a die that can only provide wood
-	 * @param mult value rolled from multiplier die
+	 * @param mult value rolled from multipler die
 	 * @param config game containing the resource information
-	 * @return string with the outcome of the roll
 	 */
 	public String rollWood(int mult, Game config){ //Access game class
 		int value = Math.abs(roller.nextInt(6)) % DICE_SIZE + 1;
@@ -66,25 +66,23 @@ public class Dice{
 
 	/**
 	 * Rolls a die that can only provide stone
-	 * @param mult value rolled from multiplier die
+	 * @param mult value rolled from multipler die
 	 * @param config game containing the resource information
-	 * @return string with the outcome of the roll
 	 */
 	public String rollStone(int mult, Game config){ //Access game class
 		int value = Math.abs(roller.nextInt()) % DICE_SIZE + 1;
 		String tmp = "";
-		if(value <= 4){
-			config.updateStone(mult);
-			tmp = "The mine has produced " + mult + " stone!";
-		}
+			if(value <= 4){
+				config.updateStone(mult);
+				tmp = "The mine has produced " + mult + " stone!";
+			}
 		return tmp;
 	}
 
 	/**
 	 * Rolls the starting die, that can provide various boons and banes
-	 * @param mult value rolled from multiplier die
+	 * @param mult value rolled from multipler die
 	 * @param config game containing the resource information
-	 * @return string with the outcome of the roll
 	 */
 	public String rollBase(int mult, Game config){ //Access Game Class
 		int value = Math.abs(roller.nextInt()) % DICE_SIZE + 1;
@@ -114,57 +112,52 @@ public class Dice{
 	}
 
 	/**
-	 * If despair is rolled on base die, this triggers something bad to happen
-	 * @param mult value rolled from multiplier die
+	 * If despiar is rolled on base die, this triggers something bad to happen
+	 * @param mult value rolled from multipler die
 	 * @param config game containing the resource information
-	 * @return string with the outcome of the roll
 	 */
 	private String rollDespair(int mult, Game config){ //Access Game Class
-		if(fence){
+		if(fence)
 			mult = mult/2;
-		}
 		String output = "";
 		int value = Math.abs(roller.nextInt()) % DICE_SIZE + 1;
-		
-		switch (value){
-		case 1:
-			config.updateWood(-mult);
-			output = "The thief has stolen " + mult + " wood!";
-			break;
-		case 2:
-			config.updateStone(-mult);
-			output = "The thief has stolen " + mult + " stone!";
-			break;
-		case 3:
-			config.updateFood(-mult);
-			output = "The thief has stolen " + mult + " food!";
-			break;
-		case 4:
-			config.updateWood(-mult);
-			config.updateStone(-mult);
-			config.updateFood(-mult);
-			output = "The thief has stolen " + mult + " of everything!";
-			break;
-		case 5:
-		case 6:
-			multipler = 4;
-			badLuck = true;
-			output = "The clouds darken the sky. Tomorrow will not be a productive day.";
-			break;
-		}
-		return output;
+				switch (value){
+				case 1:
+					config.updateWood(-mult);
+					output = "The thief has stolen " + mult + " wood!";
+					break;
+				case 2:
+					config.updateStone(-mult);
+					output = "The thief has stolen " + mult + " stone!";
+					break;
+				case 3:
+					config.updateFood(-mult);
+					output = "The thief has stolen " + mult + " food!";
+					break;
+				case 4:
+					config.updateWood(-mult);
+					config.updateStone(-mult);
+					config.updateFood(-mult);
+					output = "The thief has stolen " + mult + " of everything!";
+					break;
+				case 5:
+				case 6:
+					multipler = 4;
+					badLuck = true;
+					output = "The clouds darken the sky. Tomorrow will not be a productive day.";
+					break;
+				}
+			return output;
 	}
 
 	/**
 	 * If skill is rolled on base die, this triggers something good to happen
-	 * @param mult value rolled from multiplier die
+	 * @param mult value rolled from multipler die
 	 * @param config game containing the resource information
-	 * @return string with the outcome of the roll
 	 */
 	private String rollSkill(int mult, Game config){ //Access Game Class
 		int value = Math.abs(roller.nextInt()) % DICE_SIZE + 1;
 		String output = "";
-		
 		switch (value){
 		case 1:
 			output = "Fate favors you, and the gods have increased current wood by 50%";
@@ -194,7 +187,7 @@ public class Dice{
 	}
 
 	/**
-	 * When a house is built, the multiplier die becomes a d8 instead of a d6
+	 * When a house is built, the mutiplier die becomes a d8 instead of a d6
 	 */
 	public void upGradeMulti(){ //When house is built
 		multipler += 2;
@@ -208,34 +201,18 @@ public class Dice{
 		fence = true;
 	}
 
-	/**
-	 * Getter method for the completion status of the house
-	 * @return true/false depending if the house is built or not
-	 */
 	public boolean getHouse(){
 		return house;
 	}
 
-	/**
-	 * Getter method for the completion status of the fence
-	 * @return true/false depending if the house is built or not
-	 */
 	public boolean getFence(){
 		return fence;
 	}
 
-	/**
-	 * Getter method for the status of goodLuck
-	 * @return true/false depending on the value of goodLuck
-	 */
 	public boolean getGoodLuck(){
 		return goodLuck;
 	}
 
-	/**
-	 * Getter method for the status of badLuck
-	 * @return true/false depending on the value of badLuck
-	 */
 	public boolean getBadLuck(){
 		return badLuck;
 	}
