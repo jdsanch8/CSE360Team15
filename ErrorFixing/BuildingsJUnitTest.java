@@ -4,8 +4,7 @@ import org.junit.Test;
 
 /** Tests the Buildings class for different cases.
  * @author Team 15
- * @version April 11, 2016
- * 
+ * @version April 29, 2016
  */
 public class BuildingsJUnitTest {
 
