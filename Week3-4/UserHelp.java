@@ -13,16 +13,11 @@ import javafx.stage.Stage;
 
 /**
  * GUI to view help from menu
- * @author nathan kelly
- * @version 4.13.1100
+ * @author Team 15
+ * @version April 29, 2016
  */
 public class UserHelp {
 	
-	/**
-	 * ...
-	 * @author nathan kelly
-	 * @version 4.27.2330
-	 */
 	public static void userHelp() {
 			
 		Stage help_stg = new Stage();
